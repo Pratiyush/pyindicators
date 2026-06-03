@@ -1,8 +1,8 @@
 """Shared OHLCV generators for indicator tests.
 
-`valid_ohlcv_frames` is the reusable hypothesis strategy that emits canonical OHLCV
-frames satisfying the data-quality invariants *by construction* (no draw-and-filter).
-`deterministic_frame` is a fixed, reproducible long frame for golden/bounds tests.
+``valid_ohlcv_frames`` is a hypothesis strategy emitting frames that satisfy the OHLCV
+invariants by construction (high >= max(o,c,l), low <= min(o,c,h), volume >= 0).
+``deterministic_frame`` is a fixed 400-bar random walk for golden/bounds/parity tests.
 """
 
 from __future__ import annotations
@@ -13,37 +13,31 @@ from hypothesis import strategies as st
 
 from pyindicators import OHLCV_COLUMNS
 
-_START = pd.Timestamp("2000-01-03", tz="UTC")  # a Monday
-
 
 def _assemble(closes, open_off, up_off, down_off, vols) -> pd.DataFrame:
-    n = len(closes)
     c = np.asarray(closes, dtype="float64")
     o = c * (1.0 + np.asarray(open_off, dtype="float64"))
     hi = np.maximum(o, c) * (1.0 + np.abs(np.asarray(up_off, dtype="float64")))
     lo = np.minimum(o, c) * (1.0 - np.abs(np.asarray(down_off, dtype="float64")))
-    ts = pd.date_range(_START, periods=n, freq="D", tz="UTC")
     df = pd.DataFrame(
         {
-            "ts": ts,
             "open": o,
             "high": hi,
             "low": lo,
             "close": c,
-            "close_raw": c,
             "volume": np.asarray(vols, dtype="float64"),
-            "adj_factor": 1.0,
         }
     )
-    return df[OHLCV_COLUMNS]
+    return df[list(OHLCV_COLUMNS)]
 
 
 @st.composite
 def valid_ohlcv_frames(draw, min_rows: int = 1, max_rows: int = 120) -> pd.DataFrame:
     n = draw(st.integers(min_value=min_rows, max_value=max_rows))
-    flt = lambda lo, hi: st.floats(  # noqa: E731
-        min_value=lo, max_value=hi, allow_nan=False, allow_infinity=False
-    )
+
+    def flt(lo, hi):
+        return st.floats(min_value=lo, max_value=hi, allow_nan=False, allow_infinity=False)
+
     closes = draw(st.lists(flt(1.0, 1e5), min_size=n, max_size=n))
     open_off = draw(st.lists(flt(-0.05, 0.05), min_size=n, max_size=n))
     up_off = draw(st.lists(flt(0.0, 0.05), min_size=n, max_size=n))
@@ -52,8 +46,22 @@ def valid_ohlcv_frames(draw, min_rows: int = 1, max_rows: int = 120) -> pd.DataF
     return _assemble(closes, open_off, up_off, down_off, vols)
 
 
+def frame(close, *, high=None, low=None, open_=None, volume=None) -> pd.DataFrame:
+    """Build a small OHLCV frame from an explicit close (and optional H/L/O/V) for golden
+    tests. Unspecified H/L/O default to ``close``; volume defaults to ones."""
+    close = np.asarray(close, dtype="float64")
+    n = len(close)
+    high = close if high is None else np.asarray(high, dtype="float64")
+    low = close if low is None else np.asarray(low, dtype="float64")
+    open_ = close if open_ is None else np.asarray(open_, dtype="float64")
+    volume = np.ones(n) if volume is None else np.asarray(volume, dtype="float64")
+    return pd.DataFrame(
+        {"open": open_, "high": high, "low": low, "close": close, "volume": volume}
+    )
+
+
 def deterministic_frame(n: int = 400, seed: int = 7) -> pd.DataFrame:
-    """A fixed random-walk frame long enough to clear 252-bar warm-ups."""
+    """A fixed random-walk frame long enough to clear long warm-ups (ADX/T3/etc.)."""
     rng = np.random.default_rng(seed)
     closes = np.maximum(100.0 + np.cumsum(rng.normal(0, 1, n)), 1.0)
     open_off = rng.normal(0, 0.005, n)

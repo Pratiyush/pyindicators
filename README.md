@@ -1,18 +1,33 @@
 # pyindicators
 
-**Modular, look-ahead-safe technical-indicator library for pandas/numpy.**
+**A modular, look-ahead-safe technical-analysis library for pandas/numpy — one class per indicator.**
 
-Every indicator is a small, composable unit that computes over a canonical OHLCV frame and
-returns a frame aligned 1:1 to the input. Indicators are **causal by construction**
-(trailing-only windows, no centered windows or negative shifts), validated by a
-truncation-invariance test, and discoverable through a plugin registry.
+Every indicator is a small, fully-typed, composable unit that computes over a canonical OHLCV
+frame and returns a frame aligned 1:1 to the input. Indicators are **causal by construction**
+(trailing-only windows — no centered windows, no negative shifts, no full-series normalisation),
+verified by a truncation-invariance meta-test, and discoverable through a plugin registry.
+
+## Design principles
+
+- **One class per indicator**, organised into category packages: `base/ trend/ momentum/
+  volatility/ volume/ statistics/ cycle/ price_transform/ candles/ math_transform/ utils/`.
+- **Our own implementations only.** Every indicator is hand-rolled in vectorized pandas/numpy.
+  **Third-party TA libraries (TA-Lib, pandas-ta, finta, ta) are used *only in the test suite*
+  to cross-check correctness (parity); they are never imported at runtime.** Runtime
+  dependencies are just `pandas`, `numpy`, and `pydantic`.
+- **Typed metadata is the single source of truth.** Each class carries an `IndicatorSpec`
+  (name, category, inputs, outputs, bounds, causal, references, doc) that drives validation,
+  the registry, the parity harness, and documentation.
+- **Compose from `base/`.** Downstream indicators reuse `sma/ema/wma/rma/stdev/variance/
+  true_range` — never re-implement an EMA/ATR/RMA inline.
+- **A uniform edge-case policy** (division-by-zero, flat windows, warm-up, EMA seeding,
+  population-vs-sample stdev) is standardised once in `core/`.
 
 ## Install
 
 ```bash
-pip install pyindicators        # once published
-# or, from source:
-pip install git+https://github.com/Pratiyush/pyindicators
+pip install pyindicators                          # once published
+pip install git+https://github.com/Pratiyush/pyindicators   # from source
 ```
 
 ## Quickstart
@@ -21,41 +36,28 @@ pip install git+https://github.com/Pratiyush/pyindicators
 import pandas as pd
 import pyindicators as pyi
 
-# canonical OHLCV: columns [ts, open, high, low, close, close_raw, volume, adj_factor]
+# canonical OHLCV frame: lower-case columns open/high/low/close/volume
 df = ...
 
-rsi = pyi.INDICATORS.create("rsi", period=14)
-out = rsi.compute(df)                      # -> DataFrame with column "rsi"
+sma = pyi.INDICATORS.create("sma", length=50)
+out = sma.compute(df)                 # -> DataFrame with column "sma", indexed like df
 
-# compose many indicators into one feature frame (parametrized column names)
-feats = pyi.build_features(df, ["sma:period=50", "sma:period=200", "rsi:period=14"])
-# feats has sma_50, sma_200, rsi_14 joined onto df
-
-# multi-timeframe, no look-ahead
-weekly = pyi.resample_ohlcv(df, pyi.Timeframe.WEEK, base=pyi.Timeframe.DAY)
+print(pyi.INDICATORS.names())         # every registered indicator
 ```
 
-## Indicators
+## Testing & correctness
 
-List them at runtime:
+- **100% line + branch coverage** (`pytest-cov`, `fail_under=100`).
+- **Registry-driven meta-tests** run over *every* indicator: causality/truncation-invariance,
+  shape/dtype, declared-bounds, determinism, no input mutation.
+- **Parity tests** cross-check each indicator against the reference libraries it cites
+  (TA-Lib `<1e-6`, plus pandas-ta / finta / ta where useful); documented divergences (EMA
+  seeding, sample-vs-population stdev) are pinned. Install the oracles with the `parity` extra:
 
-```python
-import pyindicators as pyi
-print(pyi.INDICATORS.names())
+```bash
+pip install -e ".[dev,parity]"
+pytest
 ```
-
-Families: **trend** (sma, ema, wma, sma_slope, macd, adx, aroon, kama, hma), **momentum**
-(rsi, roc, momentum, stoch, cci, willr), **volatility** (atr, bbands, keltner, stdev,
-ttm_squeeze), **volume** (obv, vwap, rvol, vol_sma, mfi, force_index, adl, cmf, williams_ad),
-**structure** (rolling_high/low, donchian, pct_from_high/low), **relative**
-(rs_line, mansfield_rs, rs_rating), **vortex** — and growing.
-
-## Design
-
-- `Indicator.compute(df) -> df` (same index, columns == `outputs`); params validated by pydantic.
-- `INDICATORS` registry + `@INDICATORS.register("name")` for plug-and-play discovery.
-- `build_features` / `parse_spec` to compose indicators by `"name:param=value"` spec.
-- `resample_ohlcv` + `align_to_base` for causal multi-timeframe features.
 
 ## License
 
