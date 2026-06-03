@@ -8,6 +8,7 @@ from .aroon import Aroon, aroon
 from .dema import DEMA, dema
 from .hma import HMA, hma
 from .kama import KAMA, kama
+from .kst import KST, kst
 from .macd import MACD, macd
 from .ppo import PPO, ppo
 from .supertrend import Supertrend, supertrend
@@ -32,4 +33,5 @@ __all__ = [
     "KAMA", "kama",
     "Supertrend", "supertrend",
     "ADX", "directional_movement",
+    "KST", "kst",
 ]
