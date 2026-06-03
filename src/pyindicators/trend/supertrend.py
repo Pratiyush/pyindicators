@@ -12,8 +12,7 @@ import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field
 
 from pyindicators.core import CLOSE, HIGH, INDICATORS, LOW, Indicator, IndicatorSpec
-
-from .atr import atr
+from pyindicators.volatility.atr import atr
 
 
 def supertrend(df: pd.DataFrame, length: int = 10, mult: float = 3.0) -> dict:
