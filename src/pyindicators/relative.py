@@ -1,5 +1,13 @@
 """Relative-strength indicators (per-symbol, causal).
 
+This module bundles the classic relative-strength family used to gauge whether a
+stock is leading or lagging the broad market: ``rs_line`` (the raw price-relative
+line), ``mansfield_rs`` (Stan Weinstein's zero-centered, MA-normalized version of
+that line), and ``rs_rating`` (the IBD/William O'Neil multi-period weighted return
+that screeners later rank into a 1-99 percentile). All three measure performance of
+one symbol relative to a reference -- a benchmark for the first two, the symbol's own
+past for the last.
+
 These stay strictly per-symbol so the look-ahead meta-test applies to them. The
 universe-wide *ranking* of ``rs_rating`` into a 1-99 percentile is a Phase-3 *screener*
 concern, not an indicator concern.
@@ -35,7 +43,39 @@ def _ratio_to_benchmark(df: pd.DataFrame, benchmark_close: pd.Series | None) -> 
 
 @INDICATORS.register("rs_line")
 class RSLine(Indicator):
-    """Price relative: ``close / benchmark_close`` (rising == outperforming)."""
+    """Price-relative (RS) line: close divided by a benchmark's close; rising == leading.
+
+    What it is:
+        The relative-strength line, the most basic measure of leadership: a stock's
+        price expressed as a ratio to a market benchmark (typically SPY or the S&P
+        500). A staple of point-and-figure and CAN SLIM style analysis, it strips out
+        the market's direction so only relative performance remains.
+
+    How it works:
+        At each bar it divides the symbol's close by the benchmark's close on the same
+        bar: rs_line = close / benchmark_close. The absolute level is arbitrary (it
+        depends on the two price scales); only its direction and slope matter. With no
+        benchmark injected, the series degrades to a constant 1.0.
+
+    Best settings:
+        The only parameter is ``benchmark``, an informational label (default "SPY")
+        identifying the reference index; the actual benchmark close series is supplied
+        at construction. Use a broad-market index for general leadership, or a sector
+        ETF to judge a stock against its peers. No smoothing window is applied.
+
+    Interpretation:
+        A rising line means the stock is outperforming the benchmark; a falling line
+        means it is lagging. New highs in the RS line, especially while price is still
+        basing, flag emerging leaders. Pitfall: the raw level carries no meaning across
+        symbols, so compare slope and new highs, not one stock's ratio to another's.
+
+    Outputs:
+        rs_line -- close / benchmark_close; an arbitrary-scale ratio whose slope shows
+        relative leadership versus the benchmark.
+
+    Causal: trailing-only; no look-ahead. Warm-up rows are NaN until the window fills.
+    Source: O'Neil, How to Make Money in Stocks (CAN SLIM); standard price-relative line.
+    """
 
     name = "rs_line"
     outputs = ("rs_line",)
@@ -57,8 +97,40 @@ class RSLine(Indicator):
 
 @INDICATORS.register("mansfield_rs")
 class MansfieldRS(Indicator):
-    """Mansfield Relative Strength (Weinstein): the price-relative line normalized by its
-    own moving average, ``(RP / SMA(RP, period) - 1) * 100`` (zero-line crossings)."""
+    """Mansfield Relative Strength: the price-relative line normalized to a zero line.
+
+    What it is:
+        Stan Weinstein's relative-strength measure (popularized in "Secrets for
+        Profiting in Bull and Bear Markets" and credited to Mansfield charts). It
+        rebases the raw price-relative line around zero so leadership can be read as a
+        simple positive/negative reading rather than an arbitrary ratio level.
+
+    How it works:
+        It takes the price-relative ratio RP = close / benchmark_close, divides it by
+        its own simple moving average over ``period`` bars, subtracts 1, and scales by
+        100: mansfield_rs = (RP / SMA(RP, period) - 1) * 100. Values above zero mean RP
+        sits above its average (outperforming lately); below zero means underperforming.
+
+    Best settings:
+        ``period`` defaults to 52 (one year of weekly bars), Weinstein's classic
+        setting for stage analysis on weekly charts; it must be >= 2. Shorten it (for
+        example to ~26) for faster, noisier signals or to adapt to daily data. The
+        ``benchmark`` label (default "SPY") names the reference; its close is injected
+        at construction.
+
+    Interpretation:
+        Crossings of the zero line are the key signal: rising through zero marks a shift
+        into market leadership (Weinstein's Stage 2), dropping below zero marks lagging.
+        The distance from zero gauges the strength of out/under-performance. Pitfall: as
+        a normalized oscillator it can whipsaw around zero in choppy, trendless markets.
+
+    Outputs:
+        mansfield_rs -- zero-centered relative strength, (RP / SMA(RP, period) - 1) *
+        100; positive == leading the benchmark, negative == lagging.
+
+    Causal: trailing-only; no look-ahead. Warm-up rows are NaN until the window fills.
+    Source: Weinstein, Secrets for Profiting in Bull and Bear Markets (1988); Mansfield RS.
+    """
 
     name = "mansfield_rs"
     outputs = ("mansfield_rs",)
@@ -85,11 +157,40 @@ class MansfieldRS(Indicator):
 
 @INDICATORS.register("rs_rating")
 class RSRating(Indicator):
-    """Per-symbol weighted trailing return (IBD/O'Neil style RS, pre-ranking).
+    """Per-symbol weighted trailing return (IBD/O'Neil style RS), pre-ranking.
 
-    Emits the raw weighted return; the screener converts it to a 1-99 cross-universe
-    percentile. Default weighting emphasizes the most recent quarter (2:1:1:1 over
-    63/126/189/252 trading-day lookbacks).
+    What it is:
+        The raw input to an IBD-style Relative Strength Rating, in the tradition of
+        William O'Neil's Investor's Business Daily. It condenses a stock's own
+        multi-quarter price performance into a single number; this class emits that raw
+        number and leaves the cross-universe ranking to the screener.
+
+    How it works:
+        For each lookback it computes a trailing return, close / close.shift(lb) - 1,
+        then takes a weighted average across the lookbacks: acc = sum(w * return) and
+        the output is acc / sum(weights). Recent periods carry more weight, so the most
+        recent quarter dominates the blended return. It is purely per-symbol -- no
+        benchmark and no cross-sectional comparison happen here.
+
+    Best settings:
+        ``lookbacks`` defaults to [63, 126, 189, 252] trading days (about 3, 6, 9, and
+        12 months) with ``weights`` [2.0, 1.0, 1.0, 1.0], the classic front-weighted
+        2:1:1:1 scheme emphasizing the latest quarter. The two lists must be the same
+        non-empty length; shorten the lookbacks for faster markets or reweight to tune
+        recency emphasis.
+
+    Interpretation:
+        Higher values mean stronger trailing performance; the screener then maps the
+        raw value to a 1-99 percentile across the universe (99 = top 1%, leaders worth
+        watching). Pitfall: the raw number is only meaningful relative to other symbols
+        -- always interpret it after the cross-sectional ranking, not on its own.
+
+    Outputs:
+        rs_rating -- weights-normalized blend of trailing returns over the configured
+        lookbacks; higher == stronger recent performance, pre-ranking.
+
+    Causal: trailing-only; no look-ahead. Warm-up rows are NaN until the window fills.
+    Source: O'Neil / Investor's Business Daily Relative Strength Rating methodology.
     """
 
     name = "rs_rating"
