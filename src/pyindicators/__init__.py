@@ -23,7 +23,12 @@ __version__ = "0.2.0"
 
 # Category packages — importing each registers its indicator classes. Imported AFTER the
 # core symbols above (the statement between the import blocks keeps this order stable).
-from . import base  # noqa: E402, F401
+from . import (
+    base,  # noqa: E402, F401
+    momentum,  # noqa: E402, F401
+    trend,  # noqa: E402, F401
+    volatility,  # noqa: E402, F401
+)
 
 __all__ = [
     "INDICATORS",
