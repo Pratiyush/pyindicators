@@ -167,6 +167,12 @@ def _scan_files_with(token: str) -> str:
 
 def build() -> str:
     registered = set(pyi.INDICATORS.names())
+    # utils ships some members as plain functions (crossover family) rather than registered
+    # Indicators — count those as implemented too (they have no registry spec).
+    registered |= {
+        n for n in dir(pyi.utils)
+        if not n.startswith("_") and callable(getattr(pyi.utils, n)) and not isinstance(getattr(pyi.utils, n), type)
+    }
     golden_text = _scan("golden")
     parity_text = _scan("parity")
     real_text = _scan_files_with("real_frame")  # tests exercising genuine market data
