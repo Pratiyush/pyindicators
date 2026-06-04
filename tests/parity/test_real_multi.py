@@ -38,7 +38,7 @@ except Exception:  # pragma: no cover - import guard
 
 DF = real_frame()
 H, L, C, V = DF["high"], DF["low"], DF["close"], DF["volume"]
-HA, LA, CA = H.to_numpy(), L.to_numpy(), C.to_numpy()
+HA, LA, CA, VA = H.to_numpy(), L.to_numpy(), C.to_numpy(), V.to_numpy()
 
 
 def _collect(builders):
@@ -144,3 +144,32 @@ def test_atr_real_multi():
         (PTA, "pandas_ta", lambda: PTA.atr(H, L, C, length=14)),
     ])
     agree(INDICATORS.create("atr", length=14).compute(DF)["atr"], refs, tail=200, rtol=1e-3)
+
+
+def test_mfi_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.MFI(HA, LA, CA, VA, 14)),
+        (FINTA, "finta", lambda: FINTA.MFI(DF, period=14)),
+        (TA2, "ta", lambda: TA2.volume.money_flow_index(H, L, C, V, window=14)),
+        (PTA, "pandas_ta", lambda: PTA.mfi(H, L, C, V, length=14)),
+    ])
+    agree(INDICATORS.create("mfi", length=14).compute(DF)["mfi"], refs)
+
+
+def test_ad_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.AD(HA, LA, CA, VA)),
+        (FINTA, "finta", lambda: FINTA.ADL(DF)),
+        (PTA, "pandas_ta", lambda: PTA.ad(H, L, C, V)),
+    ])
+    agree(INDICATORS.create("ad").compute(DF)["ad"], refs)
+
+
+def test_dema_real_multi():
+    # DEMA chains EMAs; finta seeds differently -> all three converge on the tail.
+    refs = _collect([
+        (talib, "talib", lambda: talib.DEMA(CA, 20)),
+        (FINTA, "finta", lambda: FINTA.DEMA(DF, period=20)),
+        (PTA, "pandas_ta", lambda: PTA.dema(C, length=20)),
+    ])
+    agree(INDICATORS.create("dema", length=20).compute(DF)["dema"], refs, tail=200, rtol=1e-4)
