@@ -21,6 +21,11 @@ from .pvt import PVT, pvt
 from .rvol import RVOL, rvol
 from .vfi import VFI, vfi
 from .vol_sma import VolumeSMA, vol_sma
+from .vpa_climactic_bars import VPAClimacticBars, vpa_climactic_bars
+from .vpa_effort_vs_result import VPAEffortVsResult, vpa_effort_vs_result
+from .vpa_no_demand import VPANoDemand, vpa_no_demand
+from .vpa_no_supply import VpaNoSupply, vpa_no_supply
+from .vpa_stopping_volume import VPAStoppingVolume, vpa_stopping_volume
 from .vwap import VWAP, vwap
 from .vwmacd import VWMACD, vwmacd
 from .wad import WilliamsAD, wad
@@ -48,4 +53,9 @@ __all__ = [
     "FVE", "fve",
     "VFI", "vfi",
     "VWMACD", "vwmacd",
+    "VPAClimacticBars", "vpa_climactic_bars",
+    "VPAEffortVsResult", "vpa_effort_vs_result",
+    "VPANoDemand", "vpa_no_demand",
+    "VpaNoSupply", "vpa_no_supply",
+    "VPAStoppingVolume", "vpa_stopping_volume",
 ]

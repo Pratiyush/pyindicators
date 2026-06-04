@@ -43,6 +43,7 @@ from .ppo import PPO, ppo
 from .psar import PSAR, psar
 from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
+from .rainbow import Rainbow, rainbow
 from .sarext import SAREXT, sarext
 from .short_run import ShortRun, short_run
 from .sinwma import SINWMA, sinwma
@@ -122,4 +123,5 @@ __all__ = [
     "JMA", "jma",
     "MACDEXT", "macdext",
     "SAREXT", "sarext",
+    "Rainbow", "rainbow",
 ]

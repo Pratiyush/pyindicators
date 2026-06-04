@@ -18,6 +18,8 @@ from .max import MAX, max
 from .maxindex import MaxIndex, maxindex
 from .min import MIN, min
 from .minindex import MinIndex, minindex
+from .minmax import MinMax, minmax
+from .minmaxindex import MinMaxIndex, minmaxindex
 from .mult import MULT, mult
 from .sin import SIN, sin
 from .sinh import Sinh, sinh
@@ -52,4 +54,6 @@ __all__ = [
     "Sub", "sub",
     "MULT", "mult",
     "Div", "div",
+    "MinMax", "minmax",
+    "MinMaxIndex", "minmaxindex",
 ]

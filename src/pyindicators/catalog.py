@@ -46,7 +46,7 @@ def catalog_markdown() -> str:
     ]
     for category in CATEGORIES:
         items = sorted(by_category.get(category, []), key=lambda r: r["name"])
-        if not items:
+        if not items:  # pragma: no cover - every category is now populated; guard kept for empties
             continue
         lines.append(f"## {category} ({len(items)})")
         lines.append("")

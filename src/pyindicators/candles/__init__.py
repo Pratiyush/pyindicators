@@ -9,6 +9,7 @@ from __future__ import annotations
 from .abandoned_baby import AbandonedBaby, abandoned_baby
 from .advance_block import AdvanceBlock, advance_block
 from .belt_hold import BeltHold, belt_hold
+from .big_shadow import BigShadow, big_shadow
 from .breakaway import Breakaway, breakaway
 from .closing_marubozu import ClosingMarubozu, closing_marubozu
 from .conceal_baby_swallow import ConcealBabySwallow, conceal_baby_swallow
@@ -33,6 +34,7 @@ from .homing_pigeon import HomingPigeon, homing_pigeon
 from .identical_three_crows import IdenticalThreeCrows, identical_three_crows
 from .in_neck import InNeck, in_neck
 from .inverted_hammer import InvertedHammer, inverted_hammer
+from .kangaroo_tail import KangarooTail, kangaroo_tail
 from .kicking import Kicking, kicking
 from .kicking_by_length import KickingByLength, kicking_by_length
 from .ladder_bottom import LadderBottom, ladder_bottom
@@ -51,6 +53,7 @@ from .separating_lines import SeparatingLines, separating_lines
 from .shooting_star import ShootingStar, shooting_star
 from .short_line import ShortLine, short_line
 from .spinning_top import SpinningTop, spinning_top
+from .spring import Spring, spring
 from .stalled_pattern import StalledPattern, stalled_pattern
 from .stick_sandwich import StickSandwich, stick_sandwich
 from .takuri import Takuri, takuri
@@ -66,6 +69,7 @@ from .tristar import Tristar, tristar
 from .two_crows import TwoCrows, two_crows
 from .unique_three_river import UniqueThreeRiver, unique_three_river
 from .upside_gap_two_crows import UpsideGapTwoCrows, upside_gap_two_crows
+from .upthrust import Upthrust, upthrust
 from .xside_gap_three_methods import XSideGapThreeMethods, xside_gap_three_methods
 
 __all__ = [
@@ -130,4 +134,8 @@ __all__ = [
     "UniqueThreeRiver", "unique_three_river",
     "UpsideGapTwoCrows", "upside_gap_two_crows",
     "XSideGapThreeMethods", "xside_gap_three_methods",
+    "BigShadow", "big_shadow",
+    "KangarooTail", "kangaroo_tail",
+    "Spring", "spring",
+    "Upthrust", "upthrust",
 ]

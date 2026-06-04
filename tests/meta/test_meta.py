@@ -84,8 +84,8 @@ def test_declared_bounds_respected(name):
 
 # Indicators whose last row legitimately contains NaN by design:
 #  - acos/asin: only defined on [-1,1]; NaN on price-scale input (TA-Lib behaves identically).
-#  - hilo/qqe: complementary long/short sub-lines (only the active side has a value each bar).
-_LAST_ROW_NAN_OK = {"acos", "asin", "hilo", "qqe"}
+#  - hilo/qqe/td_seq: complementary sub-lines (only one side carries a value each bar).
+_LAST_ROW_NAN_OK = {"acos", "asin", "hilo", "qqe", "td_seq"}
 
 
 @pytest.mark.parametrize("name", NAMES, ids=NAMES)

@@ -49,6 +49,7 @@ from .stc import STC, stc
 from .stoch import Stochastic, stoch
 from .stochf import FastStochastic, stochf
 from .stochrsi import StochRSI, stochrsi
+from .td_seq import TDSequential, td_seq
 from .tsi import TSI, tsi
 from .ttm_momentum import TTMMomentum, ttm_momentum
 from .uo import UltimateOscillator, uo
@@ -106,4 +107,5 @@ __all__ = [
     "RSX", "rsx",
     "RSIPositiveReversal", "rsi_positive_reversal",
     "RSINegativeReversal", "rsi_negative_reversal",
+    "TDSequential", "td_seq",
 ]
