@@ -5,6 +5,7 @@ from __future__ import annotations
 from .adx import ADX, directional_movement
 from .adxr import ADXR, adxr
 from .alma import ALMA, alma
+from .amat import AMAT, amat
 from .apo import APO, apo
 from .aroon import Aroon, aroon
 from .aroon_osc import AroonOscillator, aroon_osc
@@ -19,6 +20,7 @@ from .hwma import HWMA, hwma
 from .increasing import Increasing, increasing
 from .kama import KAMA, kama
 from .kst import KST, kst
+from .long_run import LongRun, long_run
 from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
 from .mcgd import McGinleyDynamic, mcgd
@@ -29,6 +31,7 @@ from .plus_dm import PlusDM, plus_dm
 from .ppo import PPO, ppo
 from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
+from .short_run import ShortRun, short_run
 from .sinwma import SINWMA, sinwma
 from .sma_slope import SMASlope, sma_slope
 from .ssf import SuperSmoother, ssf
@@ -88,4 +91,7 @@ __all__ = [
     "PlusDM", "plus_dm",
     "MinusDM", "minus_dm",
     "AroonOscillator", "aroon_osc",
+    "LongRun", "long_run",
+    "ShortRun", "short_run",
+    "AMAT", "amat",
 ]

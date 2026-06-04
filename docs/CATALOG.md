@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **130 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **133 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,13 +14,14 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **130 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (42)
+## trend (45)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
 | `adx` | adx, plus_di, minus_di | high, low, close | Average Directional Index, DMI |
 | `adxr` | adxr | high, low, close | Average Directional Index Rating |
 | `alma` | alma | close | Arnaud Legoux MA |
+| `amat` | amat_lr, amat_sr | close | Archer Moving Averages Trends |
 | `apo` | apo | close | Absolute Price Oscillator |
 | `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator |
 | `aroon_osc` | aroon_osc | high, low | Aroon Oscillator, AROONOSC |
@@ -35,6 +36,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **130 indicat
 | `increasing` | increasing | close | Increasing |
 | `kama` | kama | close | Kaufman Adaptive MA |
 | `kst` | kst, kst_signal | close | Know Sure Thing, Summed ROC |
+| `long_run` | long_run | close | Long Run, LR |
 | `ma_spread` | ma_spread | close | MA Spread, MA Distance |
 | `macd` | macd, macd_signal, macd_hist | close | Moving Average Convergence Divergence |
 | `mcgd` | mcgd | close | McGinley Dynamic |
@@ -45,6 +47,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **130 indicat
 | `ppo` | ppo, ppo_signal, ppo_hist | close | Percentage Price Oscillator |
 | `pwma` | pwma | close | Pascal Weighted MA |
 | `qstick` | qstick | open, close | QStick |
+| `short_run` | short_run | close | Short Run, SR |
 | `sinwma` | sinwma | close | Sine Weighted MA |
 | `sma_slope` | sma_slope | close | SMA Slope |
 | `ssf` | ssf | close | Super Smoother Filter, Ehlers SSF |
