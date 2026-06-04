@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **102 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **106 indicators** across 9 categories.
 
 ## base (7)
 
@@ -91,7 +91,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **102 indicat
 | `pdist` | pdist | open, high, low, close | Price Distance |
 | `ulcer` | ulcer | close | Ulcer Index, UI |
 
-## volume (9)
+## volume (13)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -101,9 +101,13 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **102 indicat
 | `efi` | efi | close, volume | Force Index, Elder Force Index |
 | `eom` | eom | high, low, volume | Ease of Movement, EMV |
 | `mfi` | mfi | high, low, close, volume | Money Flow Index |
+| `nvi` | nvi | close, volume | Negative Volume Index |
 | `obv` | obv | close, volume | On-Balance Volume |
+| `pvi` | pvi | close, volume | Positive Volume Index |
+| `pvol` | pvol | close, volume | Price-Volume |
 | `pvt` | pvt | close, volume | Price Volume Trend |
 | `vwap` | vwap | high, low, close, volume | Volume Weighted Average Price |
+| `wad` | wad | high, low, close | Williams Accumulation/Distribution |
 
 ## statistics (12)
 
