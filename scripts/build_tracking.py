@@ -22,6 +22,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 import pyindicators as pyi  # noqa: E402
+from pyindicators.catalog import catalog_rows  # noqa: E402
+
+# Per-indicator metadata (outputs/inputs/aliases) keyed by name. `import pyindicators` above has
+# already registered every indicator, so this captures the full built set. Same source that
+# rendered the retired docs/CATALOG.md — keeps the tracker in lock-step with the registry.
+_META: dict[str, dict] = {row["name"]: row for row in catalog_rows()}
 
 # Full target catalog (deduped: each id appears under one primary category).
 TARGETS: dict[str, list[str]] = {
@@ -145,17 +151,18 @@ def _m(flag: bool) -> str:
 
 
 def _meta(name: str) -> tuple[str, str, str]:
-    """(outputs, inputs, aliases) from the live registry spec; ``—`` if not built yet.
+    """(outputs, inputs, aliases) for an indicator; ``—`` for each if it isn't built yet.
 
-    Folds the per-indicator metadata that used to live in docs/CATALOG.md into the tracker so
-    TRACKING.md is the single source of truth (outputs/inputs/aliases + build status).
+    Sources from :func:`pyindicators.catalog.catalog_rows` — the same registry-derived metadata
+    that used to render the now-retired docs/CATALOG.md — so TRACKING.md is the single source of
+    truth (per-indicator metadata + build/quality status) and can never drift from the code.
     """
-    if name not in pyi.INDICATORS.names():
+    row = _META.get(name)
+    if row is None:
         return "—", "—", "—"
-    spec = pyi.INDICATORS.get(name).spec
-    outputs = ", ".join(spec.outputs)
-    inputs = ", ".join(spec.inputs)
-    aliases = ", ".join(spec.aliases) if spec.aliases else "—"
+    outputs = ", ".join(row["outputs"])
+    inputs = ", ".join(row["inputs"])
+    aliases = ", ".join(row["aliases"]) if row["aliases"] else "—"
     return outputs, inputs, aliases
 
 

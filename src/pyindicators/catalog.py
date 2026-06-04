@@ -1,7 +1,9 @@
-"""Auto-generated indicator catalog, derived from the registry metadata.
+"""Indicator catalog metadata, derived from the registry.
 
 Because every indicator's ``IndicatorSpec`` is the single source of truth, this catalog can
-never drift from the code. ``docs/CATALOG.md`` is regenerated from :func:`catalog_markdown`.
+never drift from the code. :func:`catalog_rows` feeds the metadata columns of
+``docs/TRACKING.md`` (via ``scripts/build_tracking.py``); :func:`catalog_markdown` renders the
+same data as standalone Markdown if a category-grouped listing is ever needed.
 """
 
 from __future__ import annotations

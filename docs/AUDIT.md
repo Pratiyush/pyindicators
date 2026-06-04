@@ -7,6 +7,11 @@ than trusting our own docstrings. Re-runnable any time via the review pipeline:
 
     uv run python scripts/audit_indicators.py        # robustness + causality + parity coverage
 
+This file is the point-in-time narrative (methodology + the concerns table). For live, never-drift
+numbers — how many indicators exist, which carry an individual `review`, and each one's
+edge/parity/3-lib/real/invalid status — see the auto-generated `docs/TRACKING.md` (the single
+source of truth) and re-run the pipeline above.
+
 ## Result: 0 bugs
 
 | Category group | Indicators | Verified | Concerns | Bugs |
