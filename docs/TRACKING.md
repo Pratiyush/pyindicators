@@ -17,6 +17,8 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 
 **Guideline:** as each indicator is completed, tick its row below; when a new rule is added, backfill the column for prebuilt indicators over time. Synthetic-only data hides tie/seed bugs (e.g. it missed the Aroon tie bug) — real data and multiple libraries are what catch them.
 
+**Review pipeline:** `uv run python scripts/audit_indicators.py` re-runs the three review stages (robustness/edge+bounds, causality/determinism, parity coverage) over the whole registry and exits non-zero on any hard failure — a repeatable standing audit.
+
 ## base (7/7)
 
 | id | impl | edge | parity | 3-lib | real | invalid | status |

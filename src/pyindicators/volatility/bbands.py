@@ -20,7 +20,7 @@ def bbands(close: pd.Series, length: int = 20, mult: float = 2.0, ddof: int = 0)
     sd = stdev(close, length, ddof)
     upper = middle + mult * sd
     lower = middle - mult * sd
-    bandwidth = safe_divide(upper - lower, middle)
+    bandwidth = 100.0 * safe_divide(upper - lower, middle)  # percent of the basis (StockCharts/pta)
     pctb = safe_divide(close - lower, upper - lower)  # NaN where bands collapse (sd == 0)
     return {
         "bb_middle": middle,

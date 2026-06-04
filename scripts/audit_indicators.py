@@ -1,0 +1,174 @@
+"""Per-indicator review pipeline — a repeatable, standing audit over the WHOLE registry.
+
+Runs three review stages for every registered indicator and prints a per-indicator verdict,
+so the one-off correctness audit becomes a command you can re-run any time:
+
+    uv run python scripts/audit_indicators.py            # full table
+    uv run python scripts/audit_indicators.py --fails    # only problems
+    uv run python scripts/audit_indicators.py rsi macd   # specific indicators
+
+Review stages (the "3 types of review"):
+  1. ROBUSTNESS / EDGE  — runs on constant, interior-NaN, 2-row and zero-volume frames; the
+     output must keep the input length, never raise, never produce +/-inf, and respect the
+     indicator's declared bounds on real data.
+  2. CAUSALITY          — no look-ahead (compute(df[:k]) == compute(df)[:k]), deterministic
+     (two runs identical), and no mutation of the input frame.
+  3. PARITY COVERAGE    — confirms the indicator is cross-checked somewhere in tests/parity/
+     and, when available, on real market data (tests using real_frame). Live numeric parity
+     against the reference libraries lives in the pytest parity suite; this stage reports the
+     coverage so gaps are visible.
+
+Exit code is non-zero if any indicator fails stage 1 or 2 (hard correctness), making it safe to
+wire into a build/lint step. Stage-3 gaps are reported as warnings, not failures.
+"""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+import pyindicators as pyi
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "tests" / "data" / "aapl_daily.csv"
+OHLCV = ("open", "high", "low", "close", "volume")
+
+
+def _real() -> pd.DataFrame:
+    return pd.read_csv(DATA)[list(OHLCV)].reset_index(drop=True)
+
+
+def _const(n: int = 60) -> pd.DataFrame:
+    v = np.full(n, 50.0)
+    return pd.DataFrame({"open": v, "high": v, "low": v, "close": v, "volume": v})
+
+
+def _nan_tick(df: pd.DataFrame) -> pd.DataFrame:
+    out = df.copy()
+    out.loc[out.index[10], "close"] = np.nan
+    return out
+
+
+def _zero_vol(df: pd.DataFrame) -> pd.DataFrame:
+    out = df.copy()
+    out["volume"] = 0.0
+    return out
+
+
+def _parity_corpus() -> tuple[str, str]:
+    parity, real = [], []
+    for path in (ROOT / "tests" / "parity").rglob("*.py"):
+        text = path.read_text()
+        parity.append(text)
+        if "real_frame" in text:
+            real.append(text)
+    return "\n".join(parity), "\n".join(real)
+
+
+def _mentioned(name: str, text: str) -> bool:
+    return f'"{name}"' in text or f"'{name}'" in text
+
+
+def review_robustness(ind, real: pd.DataFrame) -> list[str]:
+    """Stage 1: edge frames never crash; output well-formed; declared bounds hold."""
+    problems = []
+    frames = {
+        "real": real,
+        "constant": _const(),
+        "nan_tick": _nan_tick(real),
+        "two_row": real.iloc[:2].copy(),
+        "zero_volume": _zero_vol(real),
+    }
+    for label, df in frames.items():
+        try:
+            out = ind.compute(df)
+        except Exception as exc:  # noqa: BLE001 - we want to report ANY crash
+            problems.append(f"crash on {label}: {type(exc).__name__}: {exc}")
+            continue
+        if len(out) != len(df):
+            problems.append(f"length changed on {label} ({len(out)} != {len(df)})")
+        if np.isinf(out.to_numpy(dtype="float64")).any():
+            problems.append(f"infinity in output on {label}")
+    out_real = ind.compute(real)
+    for col, (lo, hi) in (ind.spec.bounds or {}).items():
+        vals = out_real[col].to_numpy(dtype="float64")
+        finite = vals[np.isfinite(vals)]
+        if finite.size and (finite.min() < lo - 1e-9 or finite.max() > hi + 1e-9):
+            problems.append(f"bound breach {col} [{finite.min():.4g},{finite.max():.4g}] !in [{lo},{hi}]")
+    return problems
+
+
+def review_causality(ind, real: pd.DataFrame) -> list[str]:
+    """Stage 2: no look-ahead, deterministic, no input mutation."""
+    problems = []
+    before = real.copy(deep=True)
+    full = ind.compute(real)
+    again = ind.compute(real)
+    if not full.equals(again):
+        problems.append("non-deterministic (two computes differ)")
+    if not real.equals(before):
+        problems.append("mutated the input frame")
+    if ind.spec.causal:
+        for k in (30, len(real) // 2, len(real) - 1):
+            trunc = ind.compute(real.iloc[:k].copy())
+            a = full.iloc[:k].to_numpy(dtype="float64")
+            b = trunc.to_numpy(dtype="float64")
+            mask = np.isfinite(a) & np.isfinite(b)
+            if mask.size and not np.allclose(a[mask], b[mask], rtol=1e-9, atol=1e-9):
+                problems.append(f"look-ahead: prefix[:{k}] != truncated compute")
+                break
+    return problems
+
+
+def review_parity_coverage(name: str, parity_text: str, real_text: str) -> list[str]:
+    """Stage 3 (warnings): is the indicator cross-checked, and on real data?"""
+    warns = []
+    if not _mentioned(name, parity_text):
+        warns.append("no parity test")
+    if not _mentioned(name, real_text):
+        warns.append("no real-data test")
+    return warns
+
+
+def main(argv: list[str]) -> int:
+    only_fails = "--fails" in argv
+    requested = [a for a in argv if not a.startswith("--")]
+    names = requested or pyi.INDICATORS.names()
+    real = _real()
+    parity_text, real_text = _parity_corpus()
+
+    hard_fail = 0
+    warn_only = 0
+    rows = []
+    for name in names:
+        ind = pyi.INDICATORS.create(name)
+        p1 = review_robustness(ind, real)
+        p2 = review_causality(ind, real)
+        p3 = review_parity_coverage(name, parity_text, real_text)
+        if p1 or p2:
+            verdict, hard_fail = "FAIL", hard_fail + 1
+        elif p3:
+            verdict, warn_only = "warn", warn_only + 1
+        else:
+            verdict = "ok"
+        if only_fails and verdict == "ok":
+            continue
+        notes = "; ".join(p1 + p2 + [f"(coverage) {w}" for w in p3])
+        rows.append((verdict, name, notes))
+
+    width = max((len(n) for _, n, _ in rows), default=4)
+    for verdict, name, notes in rows:
+        mark = {"ok": "OK  ", "warn": "WARN", "FAIL": "FAIL"}[verdict]
+        print(f"{mark}  {name:<{width}}  {notes}")
+    print(
+        f"\n{len(names)} indicators reviewed — "
+        f"{len(names) - hard_fail - warn_only} ok, {warn_only} coverage-warn, {hard_fail} FAIL"
+    )
+    return 1 if hard_fail else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

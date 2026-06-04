@@ -27,8 +27,9 @@ class PriceVolumeRank(Indicator):
 
     What: a 1-4 code combining price and volume direction (Macek's bull/bear classification).
     Best settings: none (per-bar).
-    Edge cases: first bar has no prior comparison (NaN).
-    Parity: pandas-ta ``pvr``.
+    Edge cases: first bar has no prior comparison (NaN) — pandas-ta fills 0 there and emits
+        rank 1; every later bar matches pandas-ta exactly.
+    Parity: pandas-ta ``pvr`` (from bar 1 on).
     """
 
     spec = IndicatorSpec(

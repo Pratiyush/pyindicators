@@ -24,4 +24,4 @@ def test_known_values_population_stdev():
     np.testing.assert_allclose(out["bb_upper"].iloc[4], 3 + 2 * sd)
     np.testing.assert_allclose(out["bb_lower"].iloc[4], 3 - 2 * sd)
     np.testing.assert_allclose(out["bb_pctb"].iloc[4], (5 - (3 - 2 * sd)) / (4 * sd))
-    np.testing.assert_allclose(out["bb_bandwidth"].iloc[4], (4 * sd) / 3)
+    np.testing.assert_allclose(out["bb_bandwidth"].iloc[4], 100.0 * (4 * sd) / 3)

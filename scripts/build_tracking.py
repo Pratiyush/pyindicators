@@ -177,6 +177,10 @@ def build() -> str:
         "tie/seed bugs (e.g. it missed the Aroon tie bug) — real data and multiple libraries are "
         "what catch them.",
         "",
+        "**Review pipeline:** `uv run python scripts/audit_indicators.py` re-runs the three "
+        "review stages (robustness/edge+bounds, causality/determinism, parity coverage) over the "
+        "whole registry and exits non-zero on any hard failure — a repeatable standing audit.",
+        "",
     ]
     for category, ids in TARGETS.items():
         cat_done = sum(1 for n in ids if n in registered)

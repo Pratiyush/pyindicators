@@ -28,7 +28,9 @@ class TRIX(Indicator):
     What: percent rate of change of a triple EMA — a smooth, zero-centred momentum line.
     Best settings: ``length`` 15, signal 9; shorter length = more signals.
     Edge cases: guarded against a zero triple-EMA (degenerate data); long warm-up (~3*length).
-    Parity: TA-Lib ``TRIX`` (line) / pandas-ta ``trix`` (line + signal).
+    Parity: TA-Lib ``TRIX`` + pandas-ta ``trix`` for the LINE (exact). The signal here is
+        ``EMA(signal)`` (StockCharts convention); pandas-ta uses ``SMA(signal)``, so the signal
+        line differs by that smoother choice — the line is the same.
     """
 
     spec = IndicatorSpec(

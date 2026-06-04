@@ -32,7 +32,8 @@ class KST(Indicator):
     What: a weighted sum of four smoothed ROCs — a long-term momentum oscillator.
     Best settings: Pring's ROC 10/15/20/30, SMA 10/10/10/15, signal 9 (daily).
     Edge cases: long warm-up (longest ROC + its SMA, ~45 bars).
-    Parity: pandas-ta ``kst`` (not in core TA-Lib).
+    Parity: StockCharts / `ta`-library KST (canonical). pandas-ta's ``kst`` is 100x larger
+        (it omits the /100 on the percent ROCs), so the parity test divides pandas-ta by 100.
     """
 
     spec = IndicatorSpec(

@@ -26,7 +26,9 @@ class PVT(Indicator):
     What: cumulative volume weighted by percent price change — a volume-confirmation line.
     Best settings: none (cumulative); compare its trend to price.
     Edge cases: Close_{t-1} == 0 -> guarded; the first bar seeds at 0.
-    Parity: pandas-ta ``pvt`` (not in core TA-Lib).
+    Parity: pandas-ta ``pvt`` — we use the canonical StockCharts *fractional* form; pandas-ta
+        scales by 100 (percent), so the parity test divides pandas-ta by 100. PVT's absolute
+        level is arbitrary (cumulative), so the convention only affects scale.
     """
 
     spec = IndicatorSpec(

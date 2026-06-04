@@ -29,7 +29,8 @@ class CMO(Indicator):
     What: net momentum as a percentage of total movement over N bars ([-100, 100]).
     Best settings: ``length`` 14; +/-50 = strong momentum.
     Edge cases: flat window (sumUp+sumDown == 0) -> guarded to NaN.
-    Parity: TA-Lib ``CMO`` / pandas-ta ``cmo``.
+    Parity: pandas-ta ``cmo`` (Chande's original simple-sum form). NOT TA-Lib-compatible:
+        TA-Lib ``CMO`` Wilder-smooths the up/down sums and diverges materially.
     """
 
     spec = IndicatorSpec(
@@ -39,8 +40,8 @@ class CMO(Indicator):
         inputs=(CLOSE,),
         outputs=("cmo",),
         bounds={"cmo": (-100.0, 100.0)},
-        talib_compatible=True,
-        references=("Chande", "TA-Lib CMO", "pandas-ta cmo"),
+        talib_compatible=False,
+        references=("Chande", "pandas-ta cmo"),
         doc="ref/ta_docs/momentum/misc_momentum.md",
     )
 
