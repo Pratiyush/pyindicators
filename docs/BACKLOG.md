@@ -53,37 +53,32 @@ metrics, position sizing (half-Kelly). These are the strategy-validation layer, 
 
 ---
 
-## Remaining in-scope build sequence (43 of 316 unbuilt as of 273/316)
+## Remaining build sequence (10 of 316 unbuilt — 306/316 = 96% built)
 
-Evaluation by **utility × feasibility × effort**, in recommended build order. Groups 1–5 fit (or
-nearly fit) the core `Indicator` contract; group 6 needs a different contract → stays backlog.
+The full in-scope catalog is built: all base / price_transform / trend / momentum / volatility /
+volume / statistics / cycle / math_transform / utils indicators, the 61 TA-Lib candles, the
+Hilbert HT_* family, MAMA/FAMA, TD Sequential, the VSA/Wyckoff bars, and the crossover signal
+helpers. Every group 1–5 item from the previous evaluation has shipped (100% line+branch coverage,
+audit 0 correctness failures).
 
-**1. Quick wins — oracle-backed, trivial (~30 min):**
-- `minmax`, `minmaxindex` (math_transform, 2 outputs) — TA-Lib MINMAX/MINMAXINDEX exact. (Missed in the math wave.)
-- `ttm_squeeze` (momentum) — almost certainly an alias/thin variant of the built `squeeze`; verify vs pandas-ta, else register as alias.
+The **10 remaining** do not fit the core per-bar single-symbol `Indicator` contract, or lack a
+defensible spec. They split into "won't build as-is" and "needs a new contract first":
 
-**2. High-utility primitives — need a small framework decision (do early, they unblock strategies):**
-- `crossover`, `crossunder`, `crossany`, `cross_value`, `lag`, `percent_rank`, `roc1` — core signal/series helpers (HIGH utility). `decay`, `edecay` — low utility.
-- *Issue:* these take a single series / two series / series+threshold, not an OHLCV frame. Add a lightweight series-transform contract (or ship them as a `utils` functions module + thin registry wrappers where a close-based form makes sense). Decide the contract first, then each is trivial.
+**A. Won't build as registered indicators (duplicate / ill-defined):**
+- `ttm_squeeze` (momentum) — duplicate of the built `squeeze` (TTM Squeeze *is* `squeeze`). Leave as a documented alias of `squeeze`; do not add a second implementation.
+- `wammie`, `moolah` (candles) — no authoritative definition or oracle anywhere (TA-Lib / pandas-ta / finta / ta). Too ill-defined to validate. Drop unless a concrete spec surfaces.
 
-**3. Real indicators — attended, oracle-backed (moderate–hard):**
-- `mama` + `fama` (trend) — TA-Lib MAMA (one call → both); Hilbert-based, finicky exact parity (reverse-engineer like the candle helper). Medium utility, high effort.
-- `td_seq` (momentum) — TD Sequential setup/countdown; pandas-ta oracle; multi-rule, medium-high effort, popular.
-- `rainbow` (trend) — recursive SMA cascade + bands; check finta/pandas-ta oracle; low-med effort.
+**B. Needs a different contract → graduate later (NOT per-bar single-symbol OHLCV):**
+- `rs_line`, `mansfield_rs` (relative) — require a **benchmark/index** series, so they belong to a 2-input relative-strength contract (`CrossSectionalIndicator`) or the 🅰️ app/screener layer. HIGH utility, wrong layer for the 1:1 `Indicator` base.
+- `renko`, `kagi`, `three_line_break` (structure) — chart-type transforms that **resample bars**; output is not 1:1 with the input index → 🅱️ chart-transform sub-module with its own base class.
+- `vp` (volume profile) — bins volume by price level (a histogram, not a per-bar series) → 🅱️ sub-module.
+- `gsv` (volatility) — exact definition/oracle still unclear → ❓ research the spec before building.
 
-**4. VSA / price-action — golden-only (no parity oracle; define rules carefully):**
-- `vpa_climactic_bars`, `vpa_no_supply`, `vpa_no_demand`, `vpa_stopping_volume`, `vpa_effort_vs_result` (volume) — VSA bar flags (Williams/Coulling); 0/1 outputs, golden-validated.
-- `spring`, `upthrust`, `big_shadow`, `kangaroo_tail`, `wammie`, `moolah` (candles) — Wyckoff/price-action; no TA-Lib oracle; golden-only; low-med utility.
-
-**5. Hilbert cycle — hardest exact-parity, lowest everyday utility (do last, or skip):**
-- `ht_dcperiod`, `ht_dcphase`, `ht_phasor`, `ht_sine`, `ht_trendmode`, `ht_trendline` — TA-Lib HT_* exact oracles but the Hilbert Transform is TA-Lib's finickiest parity. Best: one agent cracks a shared HT helper (candle-foundation style), then the 6 reuse it.
-- `ebsw`, `dsp`, `msw` — Ehlers cycle (pandas-ta/Ehlers); moderate.
-
-**6. Different contract → stays backlog (NOT per-bar single-symbol OHLCV):**
-- `rs_line`, `mansfield_rs` (relative) — need a **benchmark/index** series → 🅰️ app/screener (or a 2-input relative-strength contract). HIGH utility, wrong layer.
-- `renko`, `kagi`, `three_line_break` (structure) — chart-type transforms that **resample bars** (output not 1:1 with input) → 🅱️ chart-transform sub-module.
-- `vp` (volume profile) — bins volume by price level (histogram, not a per-bar series) → 🅱️ sub-module.
-- `gsv` (volatility) — definition/oracle unclear → ❓ research the exact spec before building.
+**Recommended sequence when picked up:** (1) register `ttm_squeeze` as an alias of `squeeze`
+(trivial, closes 1 item); (2) build the `CrossSectionalIndicator` base, then `rs_line` +
+`mansfield_rs` (HIGH utility, unblocks relative-strength screening); (3) add the chart-transform
+sub-module base, then `renko` / `kagi` / `three_line_break` / `vp`; (4) research `gsv`, build or
+formally drop; (5) drop `wammie` / `moolah` unless a spec surfaces.
 
 ---
 _When the app/screener phase resumes, pull from this backlog. Items needing only a new base
