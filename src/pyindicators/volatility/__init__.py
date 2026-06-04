@@ -13,6 +13,8 @@ from .keltner import Keltner, keltner
 from .massi import MassIndex, massi
 from .natr import NATR, natr
 from .pdist import PriceDistance, pdist
+from .rvi import RVI, rvi
+from .thermo import Thermo, thermo
 from .ulcer import UlcerIndex, ulcer
 
 __all__ = [
@@ -28,4 +30,6 @@ __all__ = [
     "ChandelierExit", "chandelier",
     "PriceDistance", "pdist",
     "AccelerationBands", "accbands",
+    "RVI", "rvi",
+    "Thermo", "thermo",
 ]

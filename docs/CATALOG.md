@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **138 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **140 indicators** across 9 categories.
 
 ## base (7)
 
@@ -101,7 +101,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **138 indicat
 | `uo` | uo | high, low, close | Ultimate Oscillator |
 | `willr` | willr | high, low, close | Williams %R, Williams Percent Range |
 
-## volatility (12)
+## volatility (14)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -116,6 +116,8 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **138 indicat
 | `massi` | massi | high, low | Mass Index |
 | `natr` | natr | high, low, close | Normalized ATR |
 | `pdist` | pdist | open, high, low, close | Price Distance |
+| `rvi` | rvi | close | Relative Volatility Index |
+| `thermo` | thermo, thermo_ma, thermo_long, thermo_short | high, low | Elder Thermometer, Elder's Market Thermometer |
 | `ulcer` | ulcer | close | Ulcer Index, UI |
 
 ## volume (17)
