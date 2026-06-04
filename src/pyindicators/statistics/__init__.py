@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .entropy import Entropy, entropy
+from .hurst_exponent import HurstExponent, hurst_exponent
 from .kurtosis import Kurtosis, kurtosis
 from .linreg import LinearReg, linreg
 from .linreg_angle import LinearRegAngle, linreg_angle
@@ -28,4 +29,5 @@ __all__ = [
     "LinearRegIntercept", "linreg_intercept",
     "LinearRegAngle", "linreg_angle",
     "TSF", "tsf",
+    "HurstExponent", "hurst_exponent",
 ]

@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **120 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **123 indicators** across 9 categories.
 
 ## base (7)
 
@@ -54,7 +54,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **120 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (25)
+## momentum (27)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -64,6 +64,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **120 indicat
 | `cci` | cci | high, low, close | Commodity Channel Index |
 | `cfo` | cfo | close | Chande Forecast Oscillator |
 | `cg` | cg | close | Center of Gravity |
+| `cmb_composite_index` | cmb_composite_index | close | Composite Index, Brown Composite Index |
 | `cmo` | cmo | close | Chande Momentum Oscillator |
 | `coppock` | coppock | close | Coppock Curve |
 | `disparity_index` | disparity_index | close | Disparity Index |
@@ -81,6 +82,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **120 indicat
 | `stoch` | stoch_k, stoch_d | high, low, close | Stochastic Oscillator, %K/%D |
 | `stochrsi` | stochrsi_k, stochrsi_d | close | Stochastic RSI |
 | `tsi` | tsi, tsi_signal | close | True Strength Index |
+| `ttm_momentum` | ttm_momentum | high, low, close | TTM Squeeze Momentum |
 | `uo` | uo | high, low, close | Ultimate Oscillator |
 | `willr` | willr | high, low, close | Williams %R, Williams Percent Range |
 
@@ -123,11 +125,12 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **120 indicat
 | `vwap` | vwap | high, low, close, volume | Volume Weighted Average Price |
 | `wad` | wad | high, low, close | Williams Accumulation/Distribution |
 
-## statistics (12)
+## statistics (13)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
 | `entropy` | entropy | close | Shannon Entropy |
+| `hurst_exponent` | hurst_exponent | close | Hurst Exponent, Rescaled Range |
 | `kurtosis` | kurtosis | close | Rolling Kurtosis |
 | `linreg` | linreg | close | Linear Regression, LSMA |
 | `linreg_angle` | linreg_angle | close | Linear Regression Angle |

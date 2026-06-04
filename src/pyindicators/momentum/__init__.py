@@ -8,6 +8,7 @@ from .bop import BOP, bop
 from .cci import CCI, cci
 from .cfo import CFO, cfo
 from .cg import CenterOfGravity, cg
+from .cmb_composite_index import CompositeIndex, cmb_composite_index
 from .cmo import CMO, cmo
 from .coppock import Coppock, coppock
 from .disparity_index import DisparityIndex, disparity_index
@@ -25,6 +26,7 @@ from .slope import Slope, slope
 from .stoch import Stochastic, stoch
 from .stochrsi import StochRSI, stochrsi
 from .tsi import TSI, tsi
+from .ttm_momentum import TTMMomentum, ttm_momentum
 from .uo import UltimateOscillator, uo
 from .willr import WilliamsR, willr
 
@@ -54,4 +56,6 @@ __all__ = [
     "PGO", "pgo",
     "CenterOfGravity", "cg",
     "DisparityIndex", "disparity_index",
+    "TTMMomentum", "ttm_momentum",
+    "CompositeIndex", "cmb_composite_index",
 ]
