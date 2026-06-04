@@ -139,6 +139,18 @@ def build() -> str:
         "Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + golden + parity) · "
         "🚧 In progress (implemented, missing a test) · ⬜ Pending (not built).",
         "",
+        "## Definition of Done (per indicator)",
+        "",
+        "1. One file, typed metadata + params, composes `base/` (never re-inlines).",
+        "2. Golden / closed-form test + full edge-case battery.",
+        "3. **Parity vs >= 3 independent libraries** where they ship it (TA-Lib, pandas-ta, "
+        "finta, bukosabino-`ta`) — known variants excluded with a comment, never silently.",
+        "4. **Real-data parity** on `tests/data/aapl_daily.csv` (real market data via "
+        "`ohlcv_gen.real_frame()`), not only the synthetic walk. Core set: "
+        "`tests/parity/test_real_multi.py`; older indicators retrofitted incrementally.",
+        "5. Passes registry meta-tests, 100% line+branch coverage, ruff clean.",
+        "6. docs/CATALOG.md + docs/TRACKING.md regenerated; committed (authored by Pratiyush).",
+        "",
     ]
     for category, ids in TARGETS.items():
         cat_done = sum(1 for n in ids if n in registered)

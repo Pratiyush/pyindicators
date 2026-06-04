@@ -3,15 +3,21 @@
 ``valid_ohlcv_frames`` is a hypothesis strategy emitting frames that satisfy the OHLCV
 invariants by construction (high >= max(o,c,l), low <= min(o,c,h), volume >= 0).
 ``deterministic_frame`` is a fixed 400-bar random walk for golden/bounds/parity tests.
+``real_frame`` loads a committed fixture of *genuine* market data (real gaps, real volume) so
+parity is cross-checked against actual price action, not only synthetic series.
 """
 
 from __future__ import annotations
+
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from hypothesis import strategies as st
 
 from pyindicators import OHLCV_COLUMNS
+
+_DATA_DIR = Path(__file__).parent / "data"
 
 
 def _assemble(closes, open_off, up_off, down_off, vols) -> pd.DataFrame:
@@ -69,3 +75,13 @@ def deterministic_frame(n: int = 400, seed: int = 7) -> pd.DataFrame:
     down_off = np.abs(rng.normal(0, 0.005, n))
     vols = rng.integers(10**5, 10**6, n)
     return _assemble(closes, open_off, up_off, down_off, vols)
+
+
+def real_frame(symbol: str = "aapl") -> pd.DataFrame:
+    """Genuine daily OHLCV from a committed fixture (real gaps/volatility/volume).
+
+    Used by the real-data parity sweep so indicators are validated against actual market
+    behaviour, not just synthetic walks. ``tests/data/<symbol>_daily.csv``.
+    """
+    df = pd.read_csv(_DATA_DIR / f"{symbol}_daily.csv")
+    return df[list(OHLCV_COLUMNS)].reset_index(drop=True)
