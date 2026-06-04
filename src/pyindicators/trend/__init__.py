@@ -29,6 +29,7 @@ from .minus_dm import MinusDM, minus_dm
 from .plus_di import PlusDI, plus_di
 from .plus_dm import PlusDM, plus_dm
 from .ppo import PPO, ppo
+from .psar import PSAR, psar
 from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
 from .short_run import ShortRun, short_run
@@ -94,4 +95,5 @@ __all__ = [
     "LongRun", "long_run",
     "ShortRun", "short_run",
     "AMAT", "amat",
+    "PSAR", "psar",
 ]

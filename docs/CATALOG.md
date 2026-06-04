@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **141 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **144 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **141 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (45)
+## trend (46)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -45,6 +45,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **141 indicat
 | `plus_di` | plus_di | high, low, close | +DI, Plus Directional Indicator |
 | `plus_dm` | plus_dm | high, low | +DM, Plus Directional Movement |
 | `ppo` | ppo, ppo_signal, ppo_hist | close | Percentage Price Oscillator |
+| `psar` | psar, psar_af, psar_reversal | high, low | Parabolic SAR, Stop And Reverse |
 | `pwma` | pwma | close | Pascal Weighted MA |
 | `qstick` | qstick | open, close | QStick |
 | `short_run` | short_run | close | Short Run, SR |
@@ -64,7 +65,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **141 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (32)
+## momentum (33)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -77,6 +78,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **141 indicat
 | `cmb_composite_index` | cmb_composite_index | close | Composite Index, Brown Composite Index |
 | `cmo` | cmo | close | Chande Momentum Oscillator |
 | `coppock` | coppock | close | Coppock Curve |
+| `cti` | cti | close | Correlation Trend Indicator, Ehlers CTI |
 | `disparity_index` | disparity_index | close | Disparity Index |
 | `er` | er | close | Efficiency Ratio, Kaufman Efficiency Ratio |
 | `eri` | bull_power, bear_power | high, low, close | Elder Ray, Bull/Bear Power |
@@ -101,10 +103,11 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **141 indicat
 | `uo` | uo | high, low, close | Ultimate Oscillator |
 | `willr` | willr | high, low, close | Williams %R, Williams Percent Range |
 
-## volatility (14)
+## volatility (15)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
+| `aberration` | aber_zg, aber_sg, aber_xg, aber_atr | high, low, close | Aberration, ABER |
 | `accbands` | accbands_lower, accbands_mid, accbands_upper | high, low, close | Acceleration Bands, ACCBANDS |
 | `atr` | atr | high, low, close | Average True Range |
 | `bbands` | bb_middle, bb_upper, bb_lower, bb_bandwidth, bb_pctb | close | Bollinger Bands, BBANDS |

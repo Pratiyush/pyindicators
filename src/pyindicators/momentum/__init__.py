@@ -11,6 +11,7 @@ from .cg import CenterOfGravity, cg
 from .cmb_composite_index import CompositeIndex, cmb_composite_index
 from .cmo import CMO, cmo
 from .coppock import Coppock, coppock
+from .cti import CTI, cti
 from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
@@ -68,4 +69,5 @@ __all__ = [
     "KDJ", "kdj",
     "FisherTransform", "fisher",
     "RVGI", "rvgi",
+    "CTI", "cti",
 ]

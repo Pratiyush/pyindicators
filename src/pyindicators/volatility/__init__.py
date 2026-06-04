@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .aberration import Aberration, aberration
 from .accbands import AccelerationBands, accbands
 from .atr import ATR, atr
 from .bbands import BollingerBands, bbands
@@ -32,4 +33,5 @@ __all__ = [
     "AccelerationBands", "accbands",
     "RVI", "rvi",
     "Thermo", "thermo",
+    "Aberration", "aberration",
 ]
