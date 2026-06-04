@@ -11,9 +11,9 @@ Every registered indicator is run through three review stages (defined in `scrip
 2. **Causality** — no look-ahead (`compute(df[:k]) == compute(df)[:k]`), deterministic, no input mutation.
 3. **Parity coverage** — has a parity test and a real-data test (a coverage warning, not a correctness failure).
 
-## Result: **0 correctness failures** across 294 indicators
+## Result: **0 correctness failures** across 302 indicators
 
-- ✅ fully clean (passes all three stages): **182**
+- ✅ fully clean (passes all three stages): **190**
 - ⚠️ correct but missing parity/real-data coverage (stage 3): **112**
 - ❌ hard correctness failure (stage 1 or 2): **0**
 
@@ -21,18 +21,18 @@ Every registered indicator is run through three review stages (defined in `scrip
 |----------|-----------:|------:|--------------:|-----:|
 | base | 7 | 4 | 3 | 0 |
 | candles | 65 | 65 | 0 | 0 |
-| cycle | 3 | 3 | 0 | 0 |
+| cycle | 9 | 9 | 0 | 0 |
 | math_transform | 26 | 26 | 0 | 0 |
 | momentum | 52 | 29 | 23 | 0 |
 | price_transform | 7 | 0 | 7 | 0 |
 | relative | 1 | 0 | 1 | 0 |
 | statistics | 19 | 6 | 13 | 0 |
 | structure | 4 | 0 | 4 | 0 |
-| trend | 60 | 24 | 36 | 0 |
+| trend | 62 | 26 | 36 | 0 |
 | utils | 5 | 5 | 0 | 0 |
 | volatility | 18 | 7 | 11 | 0 |
 | volume | 27 | 13 | 14 | 0 |
-| **total** | **294** | **182** | **112** | **0** |
+| **total** | **302** | **190** | **112** | **0** |
 
 ## Convention/scale concerns from the original manual audit — all resolved
 

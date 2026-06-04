@@ -16,6 +16,7 @@ from .dema import DEMA, dema
 from .dpo import DPO, dpo
 from .dx import DX, dx
 from .evwma import EVWMA, evwma
+from .fama import FAMA, fama
 from .frama import FRAMA, frama
 from .fwma import FWMA, fwma
 from .hilo import HiLo, hilo
@@ -32,6 +33,7 @@ from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
 from .macdext import MACDEXT, macdext
 from .macdfix import MACDFIX, macdfix
+from .mama import MAMA, mama
 from .mcgd import McGinleyDynamic, mcgd
 from .minus_di import MinusDI, minus_di
 from .minus_dm import MinusDM, minus_dm
@@ -124,4 +126,6 @@ __all__ = [
     "MACDEXT", "macdext",
     "SAREXT", "sarext",
     "Rainbow", "rainbow",
+    "MAMA", "mama",
+    "FAMA", "fama",
 ]
