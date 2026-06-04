@@ -17,6 +17,8 @@ from .median import Median, median
 from .quantile import Quantile, quantile
 from .r_squared import RSquared, r_squared
 from .skew import Skew, skew
+from .stderr import StdErr, stderr
+from .tos_stdevall import TOSStDevAll, tos_stdevall
 from .tsf import TSF, tsf
 from .zscore import ZScore, zscore
 
@@ -38,4 +40,6 @@ __all__ = [
     "Correl", "correl",
     "Covariance", "covariance",
     "RSquared", "r_squared",
+    "StdErr", "stderr",
+    "TOSStDevAll", "tos_stdevall",
 ]

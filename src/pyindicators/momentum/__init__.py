@@ -30,12 +30,16 @@ from .mom import MOM, mom
 from .pgo import PGO, pgo
 from .psl import PSL, psl
 from .pvo import PVO, pvo
+from .qqe import QQE, qqe
 from .roc import ROC, roc
 from .rocp import ROCP, rocp
 from .rocr import ROCR, rocr
 from .rocr100 import ROCR100, rocr100
 from .rsi import RSI, rsi
+from .rsi_negative_reversal import RSINegativeReversal, rsi_negative_reversal
+from .rsi_positive_reversal import RSIPositiveReversal, rsi_positive_reversal
 from .rsl import RSL, rsl
+from .rsx import RSX, rsx
 from .rvgi import RVGI, rvgi
 from .slope import Slope, slope
 from .smi import SMIErgodic, smi
@@ -98,4 +102,8 @@ __all__ = [
     "RSL", "rsl",
     "Squeeze", "squeeze",
     "SqueezePro", "squeeze_pro",
+    "QQE", "qqe",
+    "RSX", "rsx",
+    "RSIPositiveReversal", "rsi_positive_reversal",
+    "RSINegativeReversal", "rsi_negative_reversal",
 ]

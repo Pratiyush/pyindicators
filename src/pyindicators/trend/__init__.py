@@ -15,18 +15,22 @@ from .decreasing import Decreasing, decreasing
 from .dema import DEMA, dema
 from .dpo import DPO, dpo
 from .dx import DX, dx
+from .evwma import EVWMA, evwma
 from .frama import FRAMA, frama
 from .fwma import FWMA, fwma
 from .hilo import HiLo, hilo
 from .hma import HMA, hma
 from .hwma import HWMA, hwma
+from .ichimoku import Ichimoku, ichimoku
 from .increasing import Increasing, increasing
+from .jma import JMA, jma
 from .kama import KAMA, kama
 from .kst import KST, kst
 from .long_run import LongRun, long_run
 from .lsma import LSMA, lsma
 from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
+from .macdext import MACDEXT, macdext
 from .macdfix import MACDFIX, macdfix
 from .mcgd import McGinleyDynamic, mcgd
 from .minus_di import MinusDI, minus_di
@@ -39,6 +43,7 @@ from .ppo import PPO, ppo
 from .psar import PSAR, psar
 from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
+from .sarext import SAREXT, sarext
 from .short_run import ShortRun, short_run
 from .sinwma import SINWMA, sinwma
 from .sma_slope import SMASlope, sma_slope
@@ -112,4 +117,9 @@ __all__ = [
     "Pivots", "pivots",
     "PMax", "pmax",
     "VAMA", "vama",
+    "EVWMA", "evwma",
+    "Ichimoku", "ichimoku",
+    "JMA", "jma",
+    "MACDEXT", "macdext",
+    "SAREXT", "sarext",
 ]
