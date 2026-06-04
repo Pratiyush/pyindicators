@@ -29,6 +29,7 @@ from . import (
     price_transform,  # noqa: E402, F401
     trend,  # noqa: E402, F401
     volatility,  # noqa: E402, F401
+    volume,  # noqa: E402, F401
 )
 
 __all__ = [
