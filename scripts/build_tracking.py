@@ -4,12 +4,13 @@ Lists the FULL target catalog (every indicator we intend to ship, whether built 
 and each one's pipeline status, derived from:
 - the live registry (implemented?),
 - a scan of the test suite (has a golden test? a parity test?),
-- the reference specs under ``ref/ta_docs`` (spec doc?).
+- the reference specs under ``ref/ta_docs``.
 
 Run:  uv run python scripts/build_tracking.py
 
 This is a dev tool (not shipped, not part of coverage). The TARGETS dict below is the
 hand-maintained source of truth for "what should exist"; add to it as scope grows.
+OUT_OF_SCOPE records what we deliberately exclude (and why) so it's never re-litigated.
 """
 
 from __future__ import annotations
@@ -22,8 +23,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import pyindicators as pyi  # noqa: E402
 
-# Full target catalog (deduped: each id appears under one primary category). "*" in a comment
-# marks ids that are also conceptually part of another category.
+# Full target catalog (deduped: each id appears under one primary category).
 TARGETS: dict[str, list[str]] = {
     "base": ["sma", "ema", "wma", "rma", "stdev", "variance", "true_range"],
     "price_transform": ["hl2", "hlc3", "ohlc4", "wcp", "midpoint", "midprice", "heikin_ashi"],
@@ -31,7 +31,7 @@ TARGETS: dict[str, list[str]] = {
         # moving averages
         "dema", "tema", "trima", "kama", "hma", "vwma", "alma", "zlma", "t3", "frama", "vidya",
         "fwma", "sinwma", "swma", "pwma", "hwma", "jma", "mcgd", "mama", "fama", "ssf", "vama",
-        "evwma", "lsma", "hilo", "rainbow", "sma_slope",
+        "evwma", "lsma", "hilo", "rainbow", "sma_slope", "ma_spread",
         # directional / trend systems
         "macd", "macdext", "macdfix", "ppo", "apo", "adx", "adxr", "dx", "plus_di", "minus_di",
         "plus_dm", "minus_dm", "aroon", "aroon_osc", "psar", "sarext", "supertrend", "ichimoku",
@@ -43,23 +43,29 @@ TARGETS: dict[str, list[str]] = {
         "mom", "tsi", "uo", "ao", "cmo", "fisher", "crsi", "rvgi", "coppock", "bop", "kdj", "smi",
         "eri", "inertia", "bias", "brar", "cg", "cfo", "fosc", "pgo", "psl", "qqe", "rsx", "cti",
         "squeeze", "squeeze_pro", "alligator", "gator", "laguerre_rsi", "demarker",
-        "derivative_osc", "rsl", "td_seq", "er", "slope", "pvo", "ttm_squeeze",
+        "derivative_osc", "rsl", "td_seq", "er", "slope", "pvo", "ttm_squeeze", "ttm_momentum",
+        "disparity_index", "cmb_composite_index", "rsi_positive_reversal", "rsi_negative_reversal",
     ],
     "volatility": [
         "bbands", "atr", "natr", "keltner", "donchian", "cvi", "ulcer", "hv", "massi", "rvi",
-        "accbands", "aberration", "chandelier", "hwc", "pdist", "thermo", "apz", "starc",
+        "accbands", "aberration", "chandelier", "hwc", "pdist", "thermo", "apz", "starc", "gsv",
     ],
     "volume": [
         "obv", "ad", "cmf", "adosc", "mfi", "vwap", "vp", "efi", "eom", "nvi", "pvi", "kvo",
-        "vwmacd", "pvt", "vfi", "marketfi", "pvol", "pvr", "wad", "aobv",
+        "vwmacd", "pvt", "vfi", "marketfi", "pvol", "pvr", "wad", "aobv", "rvol", "vol_sma", "fve",
+        "vpa_climactic_bars", "vpa_no_supply", "vpa_no_demand", "vpa_stopping_volume",
+        "vpa_effort_vs_result",
     ],
     "statistics": [
         "linreg", "linreg_slope", "linreg_intercept", "linreg_angle", "tsf", "correl", "beta",
         "zscore", "mad", "median", "quantile", "skew", "kurtosis", "entropy", "stderr",
-        "r_squared", "covariance", "tos_stdevall",
+        "r_squared", "covariance", "tos_stdevall", "hurst_exponent",
     ],
     "relative": ["rs_line", "mansfield_rs", "rs_rating"],
-    "structure": ["rolling_high", "rolling_low", "pct_from_high", "pct_from_low"],
+    "structure": [
+        "rolling_high", "rolling_low", "pct_from_high", "pct_from_low",
+        "renko", "kagi", "three_line_break",
+    ],
     "cycle": [
         "ht_dcperiod", "ht_dcphase", "ht_phasor", "ht_sine", "ht_trendmode", "ht_trendline",
         "ebsw", "dsp", "msw",
@@ -87,7 +93,20 @@ TARGETS: dict[str, list[str]] = {
         "short_line", "spinning_top", "stalled_pattern", "stick_sandwich", "takuri", "tasuki_gap",
         "thrusting", "tristar", "unique_three_river", "upside_gap_two_crows",
         "xside_gap_three_methods",
+        # VSA / price-action extras beyond the 61 TA-Lib CDL set
+        "spring", "upthrust", "big_shadow", "kangaroo_tail", "wammie", "moolah",
     ],
+}
+
+# Deliberately excluded (not a per-symbol OHLCV indicator) — recorded so it's not re-litigated.
+OUT_OF_SCOPE: dict[str, str] = {
+    "market breadth (McClellan, AD line, TRIN, diffusion)": "needs the whole universe's adv/decl",
+    "fundamentals (P/E, PEG, ROE, EPS growth, FCF, CAPE)": "not derivable from OHLCV",
+    "sentiment (VIX, put/call, COT, news)": "external non-price data",
+    "subjective chart patterns (head&shoulders, triangles, flags, cup&handle)": "need pivot fitting",
+    "harmonic & Elliott (Gartley, Butterfly, Bat, Crab, waves)": "subjective Fibonacci/wave fitting",
+    "pairs / cointegration / Kalman hedge": "two-symbol statistical arbitrage",
+    "supply/demand zones, order blocks, trendline-with-authority": "subjective zone/line detection",
 }
 
 
@@ -142,6 +161,14 @@ def build() -> str:
                 f"| {'✅' if parity else '⬜'} | {status} |"
             )
         lines.append("")
+
+    lines.append("## Out of scope (deliberately excluded)")
+    lines.append("")
+    lines.append("Not per-symbol OHLCV indicators — these belong in the app/screener, not here.")
+    lines.append("")
+    for item, reason in OUT_OF_SCOPE.items():
+        lines.append(f"- **{item}** — {reason}")
+    lines.append("")
     return "\n".join(lines)
 
 
