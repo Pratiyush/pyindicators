@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **112 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **116 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **112 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (31)
+## trend (34)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -24,11 +24,13 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **112 indicat
 | `apo` | apo | close | Absolute Price Oscillator |
 | `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator |
 | `chop` | chop | high, low, close | Choppiness Index |
+| `decreasing` | decreasing | close | Decreasing |
 | `dema` | dema | close | Double Exponential MA |
 | `dpo` | dpo | close | Detrended Price Oscillator |
 | `dx` | dx | high, low, close | Directional Movement Index |
 | `fwma` | fwma | close | Fibonacci Weighted MA |
 | `hma` | hma | close | Hull Moving Average |
+| `increasing` | increasing | close | Increasing |
 | `kama` | kama | close | Kaufman Adaptive MA |
 | `kst` | kst, kst_signal | close | Know Sure Thing, Summed ROC |
 | `macd` | macd, macd_signal, macd_hist | close | Moving Average Convergence Divergence |
@@ -45,6 +47,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **112 indicat
 | `tema` | tema | close | Triple Exponential MA |
 | `trima` | trima | close | Triangular MA |
 | `trix` | trix, trix_signal | close | Triple Exponential Average |
+| `ttm_trend` | ttm_trend | high, low, close | TTM Trend |
 | `vhf` | vhf | close | Vertical Horizontal Filter |
 | `vortex` | vi_plus, vi_minus | high, low, close | Vortex Indicator, VI |
 | `vwma` | vwma | close, volume | Volume Weighted MA |
@@ -96,7 +99,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **112 indicat
 | `pdist` | pdist | open, high, low, close | Price Distance |
 | `ulcer` | ulcer | close | Ulcer Index, UI |
 
-## volume (14)
+## volume (15)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -105,6 +108,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **112 indicat
 | `cmf` | cmf | high, low, close, volume | Chaikin Money Flow |
 | `efi` | efi | close, volume | Force Index, Elder Force Index |
 | `eom` | eom | high, low, volume | Ease of Movement, EMV |
+| `marketfi` | marketfi | high, low, volume | Market Facilitation Index |
 | `mfi` | mfi | high, low, close, volume | Money Flow Index |
 | `nvi` | nvi | close, volume | Negative Volume Index |
 | `obv` | obv | close, volume | On-Balance Volume |

@@ -8,11 +8,13 @@ from .alma import ALMA, alma
 from .apo import APO, apo
 from .aroon import Aroon, aroon
 from .chop import Choppiness, chop
+from .decreasing import Decreasing, decreasing
 from .dema import DEMA, dema
 from .dpo import DPO, dpo
 from .dx import DX, dx
 from .fwma import FWMA, fwma
 from .hma import HMA, hma
+from .increasing import Increasing, increasing
 from .kama import KAMA, kama
 from .kst import KST, kst
 from .macd import MACD, macd
@@ -29,6 +31,7 @@ from .t3 import T3, t3
 from .tema import TEMA, tema
 from .trima import TRIMA, trima
 from .trix import TRIX, trix
+from .ttm_trend import TTMTrend, ttm_trend
 from .vhf import VHF, vhf
 from .vortex import Vortex, vortex
 from .vwma import VWMA, vwma
@@ -66,4 +69,7 @@ __all__ = [
     "SMASlope", "sma_slope",
     "DPO", "dpo",
     "SWMA", "swma",
+    "Increasing", "increasing",
+    "Decreasing", "decreasing",
+    "TTMTrend", "ttm_trend",
 ]

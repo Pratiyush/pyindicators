@@ -7,6 +7,7 @@ from .adosc import ChaikinOscillator, adosc
 from .cmf import CMF, cmf
 from .efi import ForceIndex, efi
 from .eom import EaseOfMovement, eom
+from .marketfi import MarketFI, marketfi
 from .mfi import MFI, mfi
 from .nvi import NVI, nvi
 from .obv import OBV, obv
@@ -32,4 +33,5 @@ __all__ = [
     "PVOL", "pvol",
     "PriceVolumeRank", "pvr",
     "WilliamsAD", "wad",
+    "MarketFI", "marketfi",
 ]
