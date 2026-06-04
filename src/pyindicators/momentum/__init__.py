@@ -29,6 +29,7 @@ from .rocr100 import ROCR100, rocr100
 from .rsi import RSI, rsi
 from .rvgi import RVGI, rvgi
 from .slope import Slope, slope
+from .smi import SMIErgodic, smi
 from .stc import STC, stc
 from .stoch import Stochastic, stoch
 from .stochf import FastStochastic, stochf
@@ -74,4 +75,5 @@ __all__ = [
     "CTI", "cti",
     "STC", "stc",
     "Inertia", "inertia",
+    "SMIErgodic", "smi",
 ]

@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **146 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **147 indicators** across 9 categories.
 
 ## base (7)
 
@@ -65,7 +65,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **146 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (35)
+## momentum (36)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -96,6 +96,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **146 indicat
 | `rsi` | rsi | close | Relative Strength Index |
 | `rvgi` | rvgi, rvgi_signal, rvgi_hist | open, high, low, close | Relative Vigor Index |
 | `slope` | slope | close | Slope |
+| `smi` | smi, smi_signal, smi_osc | close | SMI Ergodic, Stochastic Momentum Index |
 | `stc` | stc, stc_macd, stc_stoch | close | Schaff Trend Cycle |
 | `stoch` | stoch_k, stoch_d | high, low, close | Stochastic Oscillator, %K/%D |
 | `stochf` | stochf_k, stochf_d | high, low, close | Fast Stochastic, STOCHF |
