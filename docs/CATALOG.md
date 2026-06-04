@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **127 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **130 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **127 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (39)
+## trend (42)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -23,6 +23,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **127 indicat
 | `alma` | alma | close | Arnaud Legoux MA |
 | `apo` | apo | close | Absolute Price Oscillator |
 | `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator |
+| `aroon_osc` | aroon_osc | high, low | Aroon Oscillator, AROONOSC |
 | `chop` | chop | high, low, close | Choppiness Index |
 | `decreasing` | decreasing | close | Decreasing |
 | `dema` | dema | close | Double Exponential MA |
@@ -38,7 +39,9 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **127 indicat
 | `macd` | macd, macd_signal, macd_hist | close | Moving Average Convergence Divergence |
 | `mcgd` | mcgd | close | McGinley Dynamic |
 | `minus_di` | minus_di | high, low, close | -DI, Minus Directional Indicator |
+| `minus_dm` | minus_dm | high, low | -DM, Minus Directional Movement |
 | `plus_di` | plus_di | high, low, close | +DI, Plus Directional Indicator |
+| `plus_dm` | plus_dm | high, low | +DM, Plus Directional Movement |
 | `ppo` | ppo, ppo_signal, ppo_hist | close | Percentage Price Oscillator |
 | `pwma` | pwma | close | Pascal Weighted MA |
 | `qstick` | qstick | open, close | QStick |

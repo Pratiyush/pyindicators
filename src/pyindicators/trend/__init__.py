@@ -7,6 +7,7 @@ from .adxr import ADXR, adxr
 from .alma import ALMA, alma
 from .apo import APO, apo
 from .aroon import Aroon, aroon
+from .aroon_osc import AroonOscillator, aroon_osc
 from .chop import Choppiness, chop
 from .decreasing import Decreasing, decreasing
 from .dema import DEMA, dema
@@ -22,7 +23,9 @@ from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
 from .mcgd import McGinleyDynamic, mcgd
 from .minus_di import MinusDI, minus_di
+from .minus_dm import MinusDM, minus_dm
 from .plus_di import PlusDI, plus_di
+from .plus_dm import PlusDM, plus_dm
 from .ppo import PPO, ppo
 from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
@@ -82,4 +85,7 @@ __all__ = [
     "McGinleyDynamic", "mcgd",
     "SuperSmoother", "ssf",
     "HWMA", "hwma",
+    "PlusDM", "plus_dm",
+    "MinusDM", "minus_dm",
+    "AroonOscillator", "aroon_osc",
 ]
