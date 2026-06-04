@@ -7,6 +7,7 @@ from .adosc import ChaikinOscillator, adosc
 from .cmf import CMF, cmf
 from .efi import ForceIndex, efi
 from .eom import EaseOfMovement, eom
+from .kvo import KVO, kvo
 from .marketfi import MarketFI, marketfi
 from .mfi import MFI, mfi
 from .nvi import NVI, nvi
@@ -38,4 +39,5 @@ __all__ = [
     "MarketFI", "marketfi",
     "RVOL", "rvol",
     "VolumeSMA", "vol_sma",
+    "KVO", "kvo",
 ]

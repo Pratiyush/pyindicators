@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **140 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **141 indicators** across 9 categories.
 
 ## base (7)
 
@@ -120,7 +120,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **140 indicat
 | `thermo` | thermo, thermo_ma, thermo_long, thermo_short | high, low | Elder Thermometer, Elder's Market Thermometer |
 | `ulcer` | ulcer | close | Ulcer Index, UI |
 
-## volume (17)
+## volume (18)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -129,6 +129,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **140 indicat
 | `cmf` | cmf | high, low, close, volume | Chaikin Money Flow |
 | `efi` | efi | close, volume | Force Index, Elder Force Index |
 | `eom` | eom | high, low, volume | Ease of Movement, EMV |
+| `kvo` | kvo, kvo_signal | high, low, close, volume | Klinger Volume Oscillator, Klinger |
 | `marketfi` | marketfi | high, low, volume | Market Facilitation Index |
 | `mfi` | mfi | high, low, close, volume | Money Flow Index |
 | `nvi` | nvi | close, volume | Negative Volume Index |
