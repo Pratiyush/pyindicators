@@ -26,6 +26,7 @@ __version__ = "0.2.0"
 from . import (
     base,  # noqa: E402, F401
     momentum,  # noqa: E402, F401
+    price_transform,  # noqa: E402, F401
     trend,  # noqa: E402, F401
     volatility,  # noqa: E402, F401
 )
