@@ -10,6 +10,7 @@ from .cfo import CFO, cfo
 from .cg import CenterOfGravity, cg
 from .cmo import CMO, cmo
 from .coppock import Coppock, coppock
+from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
 from .mom import MOM, mom
@@ -52,4 +53,5 @@ __all__ = [
     "CFO", "cfo",
     "PGO", "pgo",
     "CenterOfGravity", "cg",
+    "DisparityIndex", "disparity_index",
 ]

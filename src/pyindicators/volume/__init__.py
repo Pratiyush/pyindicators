@@ -15,6 +15,8 @@ from .pvi import PVI, pvi
 from .pvol import PVOL, pvol
 from .pvr import PriceVolumeRank, pvr
 from .pvt import PVT, pvt
+from .rvol import RVOL, rvol
+from .vol_sma import VolumeSMA, vol_sma
 from .vwap import VWAP, vwap
 from .wad import WilliamsAD, wad
 
@@ -34,4 +36,6 @@ __all__ = [
     "PriceVolumeRank", "pvr",
     "WilliamsAD", "wad",
     "MarketFI", "marketfi",
+    "RVOL", "rvol",
+    "VolumeSMA", "vol_sma",
 ]

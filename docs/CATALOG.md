@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **116 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **120 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **116 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (34)
+## trend (35)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -33,6 +33,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **116 indicat
 | `increasing` | increasing | close | Increasing |
 | `kama` | kama | close | Kaufman Adaptive MA |
 | `kst` | kst, kst_signal | close | Know Sure Thing, Summed ROC |
+| `ma_spread` | ma_spread | close | MA Spread, MA Distance |
 | `macd` | macd, macd_signal, macd_hist | close | Moving Average Convergence Divergence |
 | `minus_di` | minus_di | high, low, close | -DI, Minus Directional Indicator |
 | `plus_di` | plus_di | high, low, close | +DI, Plus Directional Indicator |
@@ -53,7 +54,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **116 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (24)
+## momentum (25)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -65,6 +66,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **116 indicat
 | `cg` | cg | close | Center of Gravity |
 | `cmo` | cmo | close | Chande Momentum Oscillator |
 | `coppock` | coppock | close | Coppock Curve |
+| `disparity_index` | disparity_index | close | Disparity Index |
 | `er` | er | close | Efficiency Ratio, Kaufman Efficiency Ratio |
 | `eri` | bull_power, bear_power | high, low, close | Elder Ray, Bull/Bear Power |
 | `mom` | mom | close | Momentum |
@@ -99,7 +101,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **116 indicat
 | `pdist` | pdist | open, high, low, close | Price Distance |
 | `ulcer` | ulcer | close | Ulcer Index, UI |
 
-## volume (15)
+## volume (17)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -116,6 +118,8 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **116 indicat
 | `pvol` | pvol | close, volume | Price-Volume |
 | `pvr` | pvr | close, volume | Price Volume Rank |
 | `pvt` | pvt | close, volume | Price Volume Trend |
+| `rvol` | rvol | volume | Relative Volume |
+| `vol_sma` | vol_sma | volume | Volume SMA, Average Volume |
 | `vwap` | vwap | high, low, close, volume | Volume Weighted Average Price |
 | `wad` | wad | high, low, close | Williams Accumulation/Distribution |
 

@@ -17,6 +17,7 @@ from .hma import HMA, hma
 from .increasing import Increasing, increasing
 from .kama import KAMA, kama
 from .kst import KST, kst
+from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
 from .minus_di import MinusDI, minus_di
 from .plus_di import PlusDI, plus_di
@@ -69,6 +70,7 @@ __all__ = [
     "SMASlope", "sma_slope",
     "DPO", "dpo",
     "SWMA", "swma",
+    "MASpread", "ma_spread",
     "Increasing", "increasing",
     "Decreasing", "decreasing",
     "TTMTrend", "ttm_trend",
