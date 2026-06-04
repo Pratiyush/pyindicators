@@ -6,11 +6,14 @@ from .ao import AwesomeOscillator, ao
 from .bias import Bias, bias
 from .bop import BOP, bop
 from .cci import CCI, cci
+from .cfo import CFO, cfo
+from .cg import CenterOfGravity, cg
 from .cmo import CMO, cmo
 from .coppock import Coppock, coppock
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
 from .mom import MOM, mom
+from .pgo import PGO, pgo
 from .psl import PSL, psl
 from .roc import ROC, roc
 from .rocp import ROCP, rocp
@@ -46,4 +49,7 @@ __all__ = [
     "EfficiencyRatio", "er",
     "Slope", "slope",
     "ElderRay", "eri",
+    "CFO", "cfo",
+    "PGO", "pgo",
+    "CenterOfGravity", "cg",
 ]

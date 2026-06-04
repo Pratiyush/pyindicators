@@ -12,6 +12,7 @@ from .nvi import NVI, nvi
 from .obv import OBV, obv
 from .pvi import PVI, pvi
 from .pvol import PVOL, pvol
+from .pvr import PriceVolumeRank, pvr
 from .pvt import PVT, pvt
 from .vwap import VWAP, vwap
 from .wad import WilliamsAD, wad
@@ -29,5 +30,6 @@ __all__ = [
     "NVI", "nvi",
     "PVI", "pvi",
     "PVOL", "pvol",
+    "PriceVolumeRank", "pvr",
     "WilliamsAD", "wad",
 ]

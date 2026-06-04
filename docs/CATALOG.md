@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **106 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **110 indicators** across 9 categories.
 
 ## base (7)
 
@@ -48,7 +48,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **106 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (21)
+## momentum (24)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -56,11 +56,14 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **106 indicat
 | `bias` | bias | close | Bias |
 | `bop` | bop | open, high, low, close | Balance of Power |
 | `cci` | cci | high, low, close | Commodity Channel Index |
+| `cfo` | cfo | close | Chande Forecast Oscillator |
+| `cg` | cg | close | Center of Gravity |
 | `cmo` | cmo | close | Chande Momentum Oscillator |
 | `coppock` | coppock | close | Coppock Curve |
 | `er` | er | close | Efficiency Ratio, Kaufman Efficiency Ratio |
 | `eri` | bull_power, bear_power | high, low, close | Elder Ray, Bull/Bear Power |
 | `mom` | mom | close | Momentum |
+| `pgo` | pgo | high, low, close | Pretty Good Oscillator |
 | `psl` | psl | close | Psychological Line |
 | `roc` | roc | close | Rate of Change |
 | `rocp` | rocp | close | Rate of Change Percentage |
@@ -91,7 +94,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **106 indicat
 | `pdist` | pdist | open, high, low, close | Price Distance |
 | `ulcer` | ulcer | close | Ulcer Index, UI |
 
-## volume (13)
+## volume (14)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -105,6 +108,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **106 indicat
 | `obv` | obv | close, volume | On-Balance Volume |
 | `pvi` | pvi | close, volume | Positive Volume Index |
 | `pvol` | pvol | close, volume | Price-Volume |
+| `pvr` | pvr | close, volume | Price Volume Rank |
 | `pvt` | pvt | close, volume | Price Volume Trend |
 | `vwap` | vwap | high, low, close, volume | Volume Weighted Average Price |
 | `wad` | wad | high, low, close | Williams Accumulation/Distribution |
