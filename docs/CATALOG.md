@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **148 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **149 indicators** across 9 categories.
 
 ## base (7)
 
@@ -65,13 +65,14 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **148 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (37)
+## momentum (38)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
 | `ao` | ao | high, low | Awesome Oscillator |
 | `bias` | bias | close | Bias |
 | `bop` | bop | open, high, low, close | Balance of Power |
+| `brar` | ar, br | open, high, low, close | BRAR, AR/BR, Sentiment |
 | `cci` | cci | high, low, close | Commodity Channel Index |
 | `cfo` | cfo | close | Chande Forecast Oscillator |
 | `cg` | cg | close | Center of Gravity |

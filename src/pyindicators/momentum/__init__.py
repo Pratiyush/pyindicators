@@ -5,6 +5,7 @@ from __future__ import annotations
 from .ao import AwesomeOscillator, ao
 from .bias import Bias, bias
 from .bop import BOP, bop
+from .brar import BRAR, brar
 from .cci import CCI, cci
 from .cfo import CFO, cfo
 from .cg import CenterOfGravity, cg
@@ -78,4 +79,5 @@ __all__ = [
     "Inertia", "inertia",
     "SMIErgodic", "smi",
     "FOSC", "fosc",
+    "BRAR", "brar",
 ]
