@@ -28,6 +28,7 @@ from .rocr100 import ROCR100, rocr100
 from .rsi import RSI, rsi
 from .rvgi import RVGI, rvgi
 from .slope import Slope, slope
+from .stc import STC, stc
 from .stoch import Stochastic, stoch
 from .stochf import FastStochastic, stochf
 from .stochrsi import StochRSI, stochrsi
@@ -70,4 +71,5 @@ __all__ = [
     "FisherTransform", "fisher",
     "RVGI", "rvgi",
     "CTI", "cti",
+    "STC", "stc",
 ]
