@@ -14,6 +14,7 @@ from .coppock import Coppock, coppock
 from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
+from .fisher import FisherTransform, fisher
 from .kdj import KDJ, kdj
 from .mom import MOM, mom
 from .pgo import PGO, pgo
@@ -24,6 +25,7 @@ from .rocp import ROCP, rocp
 from .rocr import ROCR, rocr
 from .rocr100 import ROCR100, rocr100
 from .rsi import RSI, rsi
+from .rvgi import RVGI, rvgi
 from .slope import Slope, slope
 from .stoch import Stochastic, stoch
 from .stochf import FastStochastic, stochf
@@ -64,4 +66,6 @@ __all__ = [
     "FastStochastic", "stochf",
     "PVO", "pvo",
     "KDJ", "kdj",
+    "FisherTransform", "fisher",
+    "RVGI", "rvgi",
 ]

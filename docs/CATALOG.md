@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **136 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **138 indicators** across 9 categories.
 
 ## base (7)
 
@@ -64,7 +64,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **136 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (30)
+## momentum (32)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -80,6 +80,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **136 indicat
 | `disparity_index` | disparity_index | close | Disparity Index |
 | `er` | er | close | Efficiency Ratio, Kaufman Efficiency Ratio |
 | `eri` | bull_power, bear_power | high, low, close | Elder Ray, Bull/Bear Power |
+| `fisher` | fisher, fisher_signal | high, low | Fisher Transform, FISHT |
 | `kdj` | kdj_k, kdj_d, kdj_j | high, low, close | KDJ, Random Index |
 | `mom` | mom | close | Momentum |
 | `pgo` | pgo | high, low, close | Pretty Good Oscillator |
@@ -90,6 +91,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **136 indicat
 | `rocr` | rocr | close | Rate of Change Ratio |
 | `rocr100` | rocr100 | close | Rate of Change Ratio 100 |
 | `rsi` | rsi | close | Relative Strength Index |
+| `rvgi` | rvgi, rvgi_signal, rvgi_hist | open, high, low, close | Relative Vigor Index |
 | `slope` | slope | close | Slope |
 | `stoch` | stoch_k, stoch_d | high, low, close | Stochastic Oscillator, %K/%D |
 | `stochf` | stochf_k, stochf_d | high, low, close | Fast Stochastic, STOCHF |
