@@ -11,7 +11,7 @@ from pyindicators import INDICATORS
 talib = pytest.importorskip("talib")
 
 LONG = deterministic_frame()
-O = LONG["open"].to_numpy()
+OPN = LONG["open"].to_numpy()
 H = LONG["high"].to_numpy()
 L = LONG["low"].to_numpy()
 C = LONG["close"].to_numpy()
@@ -34,7 +34,7 @@ def test_hlc3_parity():
 
 
 def test_ohlc4_parity():
-    _p(INDICATORS.create("ohlc4").compute(LONG)["ohlc4"], talib.AVGPRICE(O, H, L, C))
+    _p(INDICATORS.create("ohlc4").compute(LONG)["ohlc4"], talib.AVGPRICE(OPN, H, L, C))
 
 
 def test_wcp_parity():
