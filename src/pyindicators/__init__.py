@@ -27,7 +27,9 @@ from . import (
     base,  # noqa: E402, F401
     momentum,  # noqa: E402, F401
     price_transform,  # noqa: E402, F401
+    relative,  # noqa: E402, F401
     statistics,  # noqa: E402, F401
+    structure,  # noqa: E402, F401
     trend,  # noqa: E402, F401
     volatility,  # noqa: E402, F401
     volume,  # noqa: E402, F401

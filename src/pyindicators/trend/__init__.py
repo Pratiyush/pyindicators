@@ -21,6 +21,7 @@ from .ppo import PPO, ppo
 from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
 from .sinwma import SINWMA, sinwma
+from .sma_slope import SMASlope, sma_slope
 from .supertrend import Supertrend, supertrend
 from .t3 import T3, t3
 from .tema import TEMA, tema
@@ -60,4 +61,5 @@ __all__ = [
     "Choppiness", "chop",
     "VHF", "vhf",
     "QStick", "qstick",
+    "SMASlope", "sma_slope",
 ]

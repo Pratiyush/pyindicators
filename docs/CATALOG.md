@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **96 indicators** across 7 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **102 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **96 indicato
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (28)
+## trend (29)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -37,6 +37,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **96 indicato
 | `pwma` | pwma | close | Pascal Weighted MA |
 | `qstick` | qstick | open, close | QStick |
 | `sinwma` | sinwma | close | Sine Weighted MA |
+| `sma_slope` | sma_slope | close | SMA Slope |
 | `supertrend` | supertrend, supertrend_dir | high, low, close | Supertrend |
 | `t3` | t3 | close | Tillson T3 |
 | `tema` | tema | close | Triple Exponential MA |
@@ -120,6 +121,21 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **96 indicato
 | `skew` | skew | close | Rolling Skew |
 | `tsf` | tsf | close | Time Series Forecast |
 | `zscore` | zscore | close | Z-Score |
+
+## relative (1)
+
+| id | outputs | inputs | aliases |
+|----|---------|--------|---------|
+| `rs_rating` | rs_rating | close | Relative Strength Rating, IBD RS |
+
+## structure (4)
+
+| id | outputs | inputs | aliases |
+|----|---------|--------|---------|
+| `pct_from_high` | pct_from_high | high, close | Percent From High |
+| `pct_from_low` | pct_from_low | low, close | Percent From Low |
+| `rolling_high` | rolling_high | high | Highest High, 52-week High |
+| `rolling_low` | rolling_low | low | Lowest Low, 52-week Low |
 
 ## price_transform (7)
 
