@@ -3,23 +3,30 @@
 from __future__ import annotations
 
 from .adx import ADX, directional_movement
+from .adxr import ADXR, adxr
 from .alma import ALMA, alma
 from .apo import APO, apo
 from .aroon import Aroon, aroon
+from .chop import Choppiness, chop
 from .dema import DEMA, dema
+from .dx import DX, dx
 from .fwma import FWMA, fwma
 from .hma import HMA, hma
 from .kama import KAMA, kama
 from .kst import KST, kst
 from .macd import MACD, macd
+from .minus_di import MinusDI, minus_di
+from .plus_di import PlusDI, plus_di
 from .ppo import PPO, ppo
 from .pwma import PWMA, pwma
+from .qstick import QStick, qstick
 from .sinwma import SINWMA, sinwma
 from .supertrend import Supertrend, supertrend
 from .t3 import T3, t3
 from .tema import TEMA, tema
 from .trima import TRIMA, trima
 from .trix import TRIX, trix
+from .vhf import VHF, vhf
 from .vortex import Vortex, vortex
 from .vwma import VWMA, vwma
 from .zlma import ZLMA, zlma
@@ -46,4 +53,11 @@ __all__ = [
     "FWMA", "fwma",
     "SINWMA", "sinwma",
     "PWMA", "pwma",
+    "PlusDI", "plus_di",
+    "MinusDI", "minus_di",
+    "DX", "dx",
+    "ADXR", "adxr",
+    "Choppiness", "chop",
+    "VHF", "vhf",
+    "QStick", "qstick",
 ]

@@ -35,7 +35,7 @@ def directional_movement(df: pd.DataFrame, length: int = 14) -> dict:
     minus_di = 100.0 * safe_divide(rma(minus_dm, length), atr_)
     dx = 100.0 * safe_divide((plus_di - minus_di).abs(), plus_di + minus_di)
     adx = rma(dx, length)
-    adxr = (adx + adx.shift(length)) / 2.0
+    adxr = (adx + adx.shift(length - 1)) / 2.0  # TA-Lib lags ADXR by length-1
     return {"plus_di": plus_di, "minus_di": minus_di, "dx": dx, "adx": adx, "adxr": adxr}
 
 
