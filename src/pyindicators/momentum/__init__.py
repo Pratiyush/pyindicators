@@ -16,6 +16,7 @@ from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
 from .fisher import FisherTransform, fisher
+from .inertia import Inertia, inertia
 from .kdj import KDJ, kdj
 from .mom import MOM, mom
 from .pgo import PGO, pgo
@@ -72,4 +73,5 @@ __all__ = [
     "RVGI", "rvgi",
     "CTI", "cti",
     "STC", "stc",
+    "Inertia", "inertia",
 ]
