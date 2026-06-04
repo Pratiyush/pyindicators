@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .alligator import Alligator, alligator
 from .ao import AwesomeOscillator, ao
 from .bias import Bias, bias
 from .bop import BOP, bop
@@ -12,14 +13,19 @@ from .cg import CenterOfGravity, cg
 from .cmb_composite_index import CompositeIndex, cmb_composite_index
 from .cmo import CMO, cmo
 from .coppock import Coppock, coppock
+from .crsi import ConnorsRSI, crsi
 from .cti import CTI, cti
+from .demarker import DeMarker, demarker
+from .derivative_osc import DerivativeOscillator, derivative_osc
 from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
 from .fisher import FisherTransform, fisher
 from .fosc import FOSC, fosc
+from .gator import GatorOscillator, gator
 from .inertia import Inertia, inertia
 from .kdj import KDJ, kdj
+from .laguerre_rsi import LaguerreRSI, laguerre_rsi
 from .mom import MOM, mom
 from .pgo import PGO, pgo
 from .psl import PSL, psl
@@ -29,9 +35,12 @@ from .rocp import ROCP, rocp
 from .rocr import ROCR, rocr
 from .rocr100 import ROCR100, rocr100
 from .rsi import RSI, rsi
+from .rsl import RSL, rsl
 from .rvgi import RVGI, rvgi
 from .slope import Slope, slope
 from .smi import SMIErgodic, smi
+from .squeeze import Squeeze, squeeze
+from .squeeze_pro import SqueezePro, squeeze_pro
 from .stc import STC, stc
 from .stoch import Stochastic, stoch
 from .stochf import FastStochastic, stochf
@@ -80,4 +89,13 @@ __all__ = [
     "SMIErgodic", "smi",
     "FOSC", "fosc",
     "BRAR", "brar",
+    "Alligator", "alligator",
+    "ConnorsRSI", "crsi",
+    "DeMarker", "demarker",
+    "DerivativeOscillator", "derivative_osc",
+    "GatorOscillator", "gator",
+    "LaguerreRSI", "laguerre_rsi",
+    "RSL", "rsl",
+    "Squeeze", "squeeze",
+    "SqueezePro", "squeeze_pro",
 ]

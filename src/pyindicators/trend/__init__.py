@@ -10,24 +10,31 @@ from .apo import APO, apo
 from .aroon import Aroon, aroon
 from .aroon_osc import AroonOscillator, aroon_osc
 from .chop import Choppiness, chop
+from .cksp import CKSP, cksp
 from .decreasing import Decreasing, decreasing
 from .dema import DEMA, dema
 from .dpo import DPO, dpo
 from .dx import DX, dx
+from .frama import FRAMA, frama
 from .fwma import FWMA, fwma
+from .hilo import HiLo, hilo
 from .hma import HMA, hma
 from .hwma import HWMA, hwma
 from .increasing import Increasing, increasing
 from .kama import KAMA, kama
 from .kst import KST, kst
 from .long_run import LongRun, long_run
+from .lsma import LSMA, lsma
 from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
+from .macdfix import MACDFIX, macdfix
 from .mcgd import McGinleyDynamic, mcgd
 from .minus_di import MinusDI, minus_di
 from .minus_dm import MinusDM, minus_dm
+from .pivots import Pivots, pivots
 from .plus_di import PlusDI, plus_di
 from .plus_dm import PlusDM, plus_dm
+from .pmax import PMax, pmax
 from .ppo import PPO, ppo
 from .psar import PSAR, psar
 from .pwma import PWMA, pwma
@@ -43,6 +50,7 @@ from .tema import TEMA, tema
 from .trima import TRIMA, trima
 from .trix import TRIX, trix
 from .ttm_trend import TTMTrend, ttm_trend
+from .vama import VAMA, vama
 from .vhf import VHF, vhf
 from .vidya import VIDYA, vidya
 from .vortex import Vortex, vortex
@@ -96,4 +104,12 @@ __all__ = [
     "ShortRun", "short_run",
     "AMAT", "amat",
     "PSAR", "psar",
+    "CKSP", "cksp",
+    "FRAMA", "frama",
+    "HiLo", "hilo",
+    "LSMA", "lsma",
+    "MACDFIX", "macdfix",
+    "Pivots", "pivots",
+    "PMax", "pmax",
+    "VAMA", "vama",
 ]

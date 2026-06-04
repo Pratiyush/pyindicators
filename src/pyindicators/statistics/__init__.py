@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from .beta import Beta, beta
+from .correl import Correl, correl
+from .covariance import Covariance, covariance
 from .entropy import Entropy, entropy
 from .hurst_exponent import HurstExponent, hurst_exponent
 from .kurtosis import Kurtosis, kurtosis
@@ -12,6 +15,7 @@ from .linreg_slope import LinearRegSlope, linreg_slope
 from .mad import MAD, mad
 from .median import Median, median
 from .quantile import Quantile, quantile
+from .r_squared import RSquared, r_squared
 from .skew import Skew, skew
 from .tsf import TSF, tsf
 from .zscore import ZScore, zscore
@@ -30,4 +34,8 @@ __all__ = [
     "LinearRegAngle", "linreg_angle",
     "TSF", "tsf",
     "HurstExponent", "hurst_exponent",
+    "Beta", "beta",
+    "Correl", "correl",
+    "Covariance", "covariance",
+    "RSquared", "r_squared",
 ]

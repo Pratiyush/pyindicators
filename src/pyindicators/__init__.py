@@ -25,6 +25,7 @@ __version__ = "0.2.0"
 # core symbols above (the statement between the import blocks keeps this order stable).
 from . import (
     base,  # noqa: E402, F401
+    math_transform,  # noqa: E402, F401
     momentum,  # noqa: E402, F401
     price_transform,  # noqa: E402, F401
     relative,  # noqa: E402, F401

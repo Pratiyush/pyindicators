@@ -82,7 +82,15 @@ def test_declared_bounds_respected(name):
         assert (finite <= hi + 1e-9).all(), f"{name}.{col} > {hi}: {finite.max()}"
 
 
+# Indicators whose last row legitimately contains NaN by design:
+#  - acos/asin: only defined on [-1,1]; NaN on price-scale input (TA-Lib behaves identically).
+#  - hilo: the long/short sub-lines are complementary (only the active side has a value each bar).
+_LAST_ROW_NAN_OK = {"acos", "asin", "hilo"}
+
+
 @pytest.mark.parametrize("name", NAMES, ids=NAMES)
 def test_last_row_finite_after_warmup(name):
+    if name in _LAST_ROW_NAN_OK:
+        pytest.skip(f"{name} has a by-design NaN in its last row (domain/complementary-band)")
     out = INDICATORS.create(name).compute(LONG)
     assert np.isfinite(out.iloc[-1].to_numpy()).all(), out.iloc[-1].to_dict()
