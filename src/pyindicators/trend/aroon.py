@@ -7,17 +7,29 @@ Measures how recently the highest high / lowest low occurred within the lookback
 
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field
 
 from pyindicators.core import HIGH, INDICATORS, LOW, Indicator, IndicatorSpec
 
 
+def _bars_since_extreme_last(w: np.ndarray, extreme: str) -> float:
+    """Window position of the MOST-RECENT high/low (ties resolve to the latest bar, per TA-Lib)."""
+    rev = w[::-1]
+    idx = np.argmax(rev) if extreme == "high" else np.argmin(rev)
+    return float(len(w) - 1 - idx)  # last occurrence in the original window
+
+
 def aroon(df: pd.DataFrame, length: int = 25) -> dict:
     """Aroon Down, Up, and Oscillator over ``length`` bars."""
     win = length + 1  # TA-Lib looks over the current bar + the previous `length`
-    up = df[HIGH].rolling(win, min_periods=win).apply(lambda w: 100.0 * w.argmax() / length, raw=True)
-    down = df[LOW].rolling(win, min_periods=win).apply(lambda w: 100.0 * w.argmin() / length, raw=True)
+    up = df[HIGH].rolling(win, min_periods=win).apply(
+        lambda w: 100.0 * _bars_since_extreme_last(w, "high") / length, raw=True
+    )
+    down = df[LOW].rolling(win, min_periods=win).apply(
+        lambda w: 100.0 * _bars_since_extreme_last(w, "low") / length, raw=True
+    )
     return {"aroon_down": down, "aroon_up": up, "aroon_osc": up - down}
 
 

@@ -24,6 +24,15 @@ def test_aroon_strong_downtrend():
     np.testing.assert_allclose(out["aroon_down"].iloc[-1], 100.0)
 
 
+def test_aroon_ties_use_most_recent_extreme():
+    # A repeated high must count from the LATEST occurrence (TA-Lib convention), not the first.
+    # The last bar re-touches the window high, so AroonUp is 100 (regression guard, found via
+    # real-data parity).
+    high = np.array([5, 9, 7, 9, 8, 9.0])  # 9 recurs, most recently on the final bar
+    out = INDICATORS.create("aroon", length=5).compute(frame(high, high=high, low=high))
+    assert out["aroon_up"].iloc[-1] == 100.0
+
+
 # --- Vortex ------------------------------------------------------------------
 def test_vortex_positive_on_real_data():
     out = INDICATORS.create("vortex", length=14).compute(deterministic_frame(120))
