@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **147 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **148 indicators** across 9 categories.
 
 ## base (7)
 
@@ -65,7 +65,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **147 indicat
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |
 
-## momentum (36)
+## momentum (37)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -83,6 +83,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **147 indicat
 | `er` | er | close | Efficiency Ratio, Kaufman Efficiency Ratio |
 | `eri` | bull_power, bear_power | high, low, close | Elder Ray, Bull/Bear Power |
 | `fisher` | fisher, fisher_signal | high, low | Fisher Transform, FISHT |
+| `fosc` | fosc | close | Forecast Oscillator |
 | `inertia` | inertia | close | Inertia |
 | `kdj` | kdj_k, kdj_d, kdj_j | high, low, close | KDJ, Random Index |
 | `mom` | mom | close | Momentum |

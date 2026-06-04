@@ -98,6 +98,23 @@ TARGETS: dict[str, list[str]] = {
     ],
 }
 
+# Indicators that have passed an individual correctness + test-case code review (source read
+# line-by-line, formula verified against the canonical reference, and the indicator's own test
+# file reviewed). See ref/AUDIT_base_pricetransform_stats_relative_structure.md for the writeup.
+REVIEWED: set[str] = {
+    # base
+    "sma", "ema", "wma", "rma", "stdev", "variance", "true_range",
+    # price_transform
+    "hl2", "hlc3", "ohlc4", "wcp", "midpoint", "midprice", "heikin_ashi",
+    # statistics
+    "linreg", "linreg_slope", "linreg_intercept", "linreg_angle", "tsf", "zscore", "mad",
+    "median", "quantile", "skew", "kurtosis", "entropy", "hurst_exponent",
+    # relative
+    "rs_rating",
+    # structure
+    "rolling_high", "rolling_low", "pct_from_high", "pct_from_low",
+}
+
 # Deliberately excluded (not a per-symbol OHLCV indicator) — recorded so it's not re-litigated.
 OUT_OF_SCOPE: dict[str, str] = {
     "market breadth (McClellan, AD line, TRIN, diffusion)": "needs the whole universe's adv/decl",
@@ -155,7 +172,10 @@ def build() -> str:
         "Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parity) · "
         "🚧 In progress (implemented, missing a test) · ⬜ Pending (not built). The "
         "**3-lib / real / invalid** columns track the quality bar below — built indicators that "
-        "predate a rule are backfilled incrementally (⬜ = todo, not a regression).",
+        "predate a rule are backfilled incrementally (⬜ = todo, not a regression). The "
+        "**review** column = an individual correctness + test-case code review has been done "
+        "(source verified against the canonical formula and the indicator's own test reviewed); "
+        "see `ref/AUDIT_base_pricetransform_stats_relative_structure.md`.",
         "",
         "## Definition of Done (per indicator) — the quality checklist",
         "",
@@ -186,8 +206,8 @@ def build() -> str:
         cat_done = sum(1 for n in ids if n in registered)
         lines.append(f"## {category} ({cat_done}/{len(ids)})")
         lines.append("")
-        lines.append("| id | impl | edge | parity | 3-lib | real | invalid | status |")
-        lines.append("|----|------|------|--------|-------|------|---------|--------|")
+        lines.append("| id | impl | edge | parity | 3-lib | real | invalid | review | status |")
+        lines.append("|----|------|------|--------|-------|------|---------|--------|--------|")
         for name in ids:
             impl = name in registered
             golden = _mentions(name, golden_text)
@@ -195,6 +215,7 @@ def build() -> str:
             xlib = _mentions(name, xlib_text)  # cross-checked vs >=3 libs (test_real_multi)
             real = _mentions(name, real_text)  # has a real-data test
             invalid = impl  # every registered indicator is covered by the invalid-input meta-test
+            review = name in REVIEWED  # individual correctness + test-case code review done
             if not impl:
                 status = "⬜ Pending"
             elif golden and parity:
@@ -203,7 +224,7 @@ def build() -> str:
                 status = "🚧 In progress"
             lines.append(
                 f"| `{name}` | {_m(impl)} | {_m(golden)} | {_m(parity)} | {_m(xlib)} "
-                f"| {_m(real)} | {_m(invalid)} | {status} |"
+                f"| {_m(real)} | {_m(invalid)} | {_m(review)} | {status} |"
             )
         lines.append("")
 

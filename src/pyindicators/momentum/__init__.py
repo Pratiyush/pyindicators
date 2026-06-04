@@ -16,6 +16,7 @@ from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
 from .fisher import FisherTransform, fisher
+from .fosc import FOSC, fosc
 from .inertia import Inertia, inertia
 from .kdj import KDJ, kdj
 from .mom import MOM, mom
@@ -76,4 +77,5 @@ __all__ = [
     "STC", "stc",
     "Inertia", "inertia",
     "SMIErgodic", "smi",
+    "FOSC", "fosc",
 ]
