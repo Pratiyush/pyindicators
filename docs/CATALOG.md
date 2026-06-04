@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **123 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **127 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **123 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (35)
+## trend (39)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -30,11 +30,13 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **123 indicat
 | `dx` | dx | high, low, close | Directional Movement Index |
 | `fwma` | fwma | close | Fibonacci Weighted MA |
 | `hma` | hma | close | Hull Moving Average |
+| `hwma` | hwma | close | Holt-Winter Moving Average |
 | `increasing` | increasing | close | Increasing |
 | `kama` | kama | close | Kaufman Adaptive MA |
 | `kst` | kst, kst_signal | close | Know Sure Thing, Summed ROC |
 | `ma_spread` | ma_spread | close | MA Spread, MA Distance |
 | `macd` | macd, macd_signal, macd_hist | close | Moving Average Convergence Divergence |
+| `mcgd` | mcgd | close | McGinley Dynamic |
 | `minus_di` | minus_di | high, low, close | -DI, Minus Directional Indicator |
 | `plus_di` | plus_di | high, low, close | +DI, Plus Directional Indicator |
 | `ppo` | ppo, ppo_signal, ppo_hist | close | Percentage Price Oscillator |
@@ -42,6 +44,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **123 indicat
 | `qstick` | qstick | open, close | QStick |
 | `sinwma` | sinwma | close | Sine Weighted MA |
 | `sma_slope` | sma_slope | close | SMA Slope |
+| `ssf` | ssf | close | Super Smoother Filter, Ehlers SSF |
 | `supertrend` | supertrend, supertrend_dir | high, low, close | Supertrend |
 | `swma` | swma | close | Symmetric Weighted MA |
 | `t3` | t3 | close | Tillson T3 |
@@ -50,6 +53,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **123 indicat
 | `trix` | trix, trix_signal | close | Triple Exponential Average |
 | `ttm_trend` | ttm_trend | high, low, close | TTM Trend |
 | `vhf` | vhf | close | Vertical Horizontal Filter |
+| `vidya` | vidya | close | Variable Index Dynamic Average |
 | `vortex` | vi_plus, vi_minus | high, low, close | Vortex Indicator, VI |
 | `vwma` | vwma | close, volume | Volume Weighted MA |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA |

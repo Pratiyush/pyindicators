@@ -14,11 +14,13 @@ from .dpo import DPO, dpo
 from .dx import DX, dx
 from .fwma import FWMA, fwma
 from .hma import HMA, hma
+from .hwma import HWMA, hwma
 from .increasing import Increasing, increasing
 from .kama import KAMA, kama
 from .kst import KST, kst
 from .ma_spread import MASpread, ma_spread
 from .macd import MACD, macd
+from .mcgd import McGinleyDynamic, mcgd
 from .minus_di import MinusDI, minus_di
 from .plus_di import PlusDI, plus_di
 from .ppo import PPO, ppo
@@ -26,6 +28,7 @@ from .pwma import PWMA, pwma
 from .qstick import QStick, qstick
 from .sinwma import SINWMA, sinwma
 from .sma_slope import SMASlope, sma_slope
+from .ssf import SuperSmoother, ssf
 from .supertrend import Supertrend, supertrend
 from .swma import SWMA, swma
 from .t3 import T3, t3
@@ -34,6 +37,7 @@ from .trima import TRIMA, trima
 from .trix import TRIX, trix
 from .ttm_trend import TTMTrend, ttm_trend
 from .vhf import VHF, vhf
+from .vidya import VIDYA, vidya
 from .vortex import Vortex, vortex
 from .vwma import VWMA, vwma
 from .zlma import ZLMA, zlma
@@ -74,4 +78,8 @@ __all__ = [
     "Increasing", "increasing",
     "Decreasing", "decreasing",
     "TTMTrend", "ttm_trend",
+    "VIDYA", "vidya",
+    "McGinleyDynamic", "mcgd",
+    "SuperSmoother", "ssf",
+    "HWMA", "hwma",
 ]
