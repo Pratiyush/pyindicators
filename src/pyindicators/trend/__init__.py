@@ -9,6 +9,7 @@ from .apo import APO, apo
 from .aroon import Aroon, aroon
 from .chop import Choppiness, chop
 from .dema import DEMA, dema
+from .dpo import DPO, dpo
 from .dx import DX, dx
 from .fwma import FWMA, fwma
 from .hma import HMA, hma
@@ -23,6 +24,7 @@ from .qstick import QStick, qstick
 from .sinwma import SINWMA, sinwma
 from .sma_slope import SMASlope, sma_slope
 from .supertrend import Supertrend, supertrend
+from .swma import SWMA, swma
 from .t3 import T3, t3
 from .tema import TEMA, tema
 from .trima import TRIMA, trima
@@ -62,4 +64,6 @@ __all__ = [
     "VHF", "vhf",
     "QStick", "qstick",
     "SMASlope", "sma_slope",
+    "DPO", "dpo",
+    "SWMA", "swma",
 ]

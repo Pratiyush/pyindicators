@@ -1,6 +1,6 @@
 # pyindicators — indicator catalog
 
-_Auto-generated from the registry metadata (do not edit by hand)._ **110 indicators** across 9 categories.
+_Auto-generated from the registry metadata (do not edit by hand)._ **112 indicators** across 9 categories.
 
 ## base (7)
 
@@ -14,7 +14,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **110 indicat
 | `variance` | variance | close | VAR, Moving Variance |
 | `wma` | wma | close | Linearly Weighted MA, LWMA |
 
-## trend (29)
+## trend (31)
 
 | id | outputs | inputs | aliases |
 |----|---------|--------|---------|
@@ -25,6 +25,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **110 indicat
 | `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator |
 | `chop` | chop | high, low, close | Choppiness Index |
 | `dema` | dema | close | Double Exponential MA |
+| `dpo` | dpo | close | Detrended Price Oscillator |
 | `dx` | dx | high, low, close | Directional Movement Index |
 | `fwma` | fwma | close | Fibonacci Weighted MA |
 | `hma` | hma | close | Hull Moving Average |
@@ -39,6 +40,7 @@ _Auto-generated from the registry metadata (do not edit by hand)._ **110 indicat
 | `sinwma` | sinwma | close | Sine Weighted MA |
 | `sma_slope` | sma_slope | close | SMA Slope |
 | `supertrend` | supertrend, supertrend_dir | high, low, close | Supertrend |
+| `swma` | swma | close | Symmetric Weighted MA |
 | `t3` | t3 | close | Tillson T3 |
 | `tema` | tema | close | Triple Exponential MA |
 | `trima` | trima | close | Triangular MA |
