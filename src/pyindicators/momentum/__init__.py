@@ -14,9 +14,11 @@ from .coppock import Coppock, coppock
 from .disparity_index import DisparityIndex, disparity_index
 from .er import EfficiencyRatio, er
 from .eri import ElderRay, eri
+from .kdj import KDJ, kdj
 from .mom import MOM, mom
 from .pgo import PGO, pgo
 from .psl import PSL, psl
+from .pvo import PVO, pvo
 from .roc import ROC, roc
 from .rocp import ROCP, rocp
 from .rocr import ROCR, rocr
@@ -24,6 +26,7 @@ from .rocr100 import ROCR100, rocr100
 from .rsi import RSI, rsi
 from .slope import Slope, slope
 from .stoch import Stochastic, stoch
+from .stochf import FastStochastic, stochf
 from .stochrsi import StochRSI, stochrsi
 from .tsi import TSI, tsi
 from .ttm_momentum import TTMMomentum, ttm_momentum
@@ -58,4 +61,7 @@ __all__ = [
     "DisparityIndex", "disparity_index",
     "TTMMomentum", "ttm_momentum",
     "CompositeIndex", "cmb_composite_index",
+    "FastStochastic", "stochf",
+    "PVO", "pvo",
+    "KDJ", "kdj",
 ]
