@@ -199,6 +199,14 @@ DEEP_REVIEWED: set[str] = {
     "pvt", "vfi", "marketfi", "pvol", "pvr", "wad", "aobv", "rvol", "vol_sma", "fve",
     "vpa_climactic_bars", "vpa_no_supply", "vpa_no_demand", "vpa_stopping_volume",
     "vpa_effort_vs_result",
+    # trend (ref/AUDIT_trend.md)
+    "dema", "tema", "trima", "kama", "hma", "vwma", "alma", "zlma", "t3", "frama", "vidya",
+    "fwma", "sinwma", "swma", "pwma", "hwma", "jma", "mcgd", "mama", "fama", "ssf", "vama",
+    "evwma", "lsma", "hilo", "rainbow", "sma_slope", "ma_spread", "macd", "macdext", "macdfix",
+    "ppo", "apo", "adx", "adxr", "dx", "plus_di", "minus_di", "plus_dm", "minus_dm", "aroon",
+    "aroon_osc", "psar", "sarext", "supertrend", "ichimoku", "vortex", "trix", "kst", "dpo",
+    "chop", "vhf", "cksp", "qstick", "ttm_trend", "increasing", "decreasing", "amat", "pmax",
+    "pivots", "long_run", "short_run",
 }
 
 # The 7 convention/scale concerns surfaced by the original four-way manual audit — all resolved.
