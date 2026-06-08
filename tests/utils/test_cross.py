@@ -7,8 +7,19 @@ import pandas as pd
 import pytest
 
 from ohlcv_gen import real_frame
+from pyindicators import utils
 from pyindicators.base import sma
 from pyindicators.utils import cross_value, crossany, crossover, crossunder
+
+
+@pytest.mark.parametrize("name", ["crossover", "crossunder", "crossany", "cross_value"])
+def test_cross_family_is_binary_on_real_data(name):
+    """Every helper emits a clean 0/1 signal on genuine market data (by-name smoke test)."""
+    c = real_frame()["close"]
+    fast, slow = sma(c, 10), sma(c, 30)
+    fn = getattr(utils, name)
+    out = fn(c, 100.0) if name == "cross_value" else fn(fast, slow)
+    assert set(out.dropna().unique()).issubset({0.0, 1.0})
 
 
 def test_crossover_golden():

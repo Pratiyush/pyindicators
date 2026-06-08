@@ -93,7 +93,7 @@ class Squeeze(Indicator):
     spec = IndicatorSpec(
         name="squeeze",
         category="momentum",
-        aliases=("TTM Squeeze", "SQZ", "Squeeze Momentum"),
+        aliases=("TTM Squeeze", "SQZ", "Squeeze Momentum", "ttm_squeeze"),
         inputs=(HIGH, LOW, CLOSE),
         outputs=("squeeze", "squeeze_on", "squeeze_off", "squeeze_no"),
         bounds={

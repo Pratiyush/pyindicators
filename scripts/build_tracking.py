@@ -55,15 +55,15 @@ TARGETS: dict[str, list[str]] = {
         "mom", "tsi", "uo", "ao", "cmo", "fisher", "crsi", "rvgi", "coppock", "bop", "kdj", "smi",
         "eri", "inertia", "bias", "brar", "cg", "cfo", "fosc", "pgo", "psl", "qqe", "rsx", "cti",
         "squeeze", "squeeze_pro", "alligator", "gator", "laguerre_rsi", "demarker",
-        "derivative_osc", "rsl", "td_seq", "er", "slope", "pvo", "ttm_squeeze", "ttm_momentum",
+        "derivative_osc", "rsl", "td_seq", "er", "slope", "pvo", "ttm_momentum",
         "disparity_index", "cmb_composite_index", "rsi_positive_reversal", "rsi_negative_reversal",
     ],
     "volatility": [
         "bbands", "atr", "natr", "keltner", "donchian", "cvi", "ulcer", "hv", "massi", "rvi",
-        "accbands", "aberration", "chandelier", "hwc", "pdist", "thermo", "apz", "starc", "gsv",
+        "accbands", "aberration", "chandelier", "hwc", "pdist", "thermo", "apz", "starc",
     ],
     "volume": [
-        "obv", "ad", "cmf", "adosc", "mfi", "vwap", "vp", "efi", "eom", "nvi", "pvi", "kvo",
+        "obv", "ad", "cmf", "adosc", "mfi", "vwap", "efi", "eom", "nvi", "pvi", "kvo",
         "vwmacd", "pvt", "vfi", "marketfi", "pvol", "pvr", "wad", "aobv", "rvol", "vol_sma", "fve",
         "vpa_climactic_bars", "vpa_no_supply", "vpa_no_demand", "vpa_stopping_volume",
         "vpa_effort_vs_result",
@@ -73,11 +73,8 @@ TARGETS: dict[str, list[str]] = {
         "zscore", "mad", "median", "quantile", "skew", "kurtosis", "entropy", "stderr",
         "r_squared", "covariance", "tos_stdevall", "hurst_exponent",
     ],
-    "relative": ["rs_line", "mansfield_rs", "rs_rating"],
-    "structure": [
-        "rolling_high", "rolling_low", "pct_from_high", "pct_from_low",
-        "renko", "kagi", "three_line_break",
-    ],
+    "relative": ["rs_rating"],
+    "structure": ["rolling_high", "rolling_low", "pct_from_high", "pct_from_low"],
     "cycle": [
         "ht_dcperiod", "ht_dcphase", "ht_phasor", "ht_sine", "ht_trendmode", "ht_trendline",
         "ebsw", "dsp", "msw",
@@ -106,7 +103,7 @@ TARGETS: dict[str, list[str]] = {
         "thrusting", "tristar", "unique_three_river", "upside_gap_two_crows",
         "xside_gap_three_methods",
         # VSA / price-action extras beyond the 61 TA-Lib CDL set
-        "spring", "upthrust", "big_shadow", "kangaroo_tail", "wammie", "moolah",
+        "spring", "upthrust", "big_shadow", "kangaroo_tail",
     ],
 }
 
@@ -121,11 +118,29 @@ OUT_OF_SCOPE: dict[str, str] = {
     "supply/demand zones, order blocks, trendline-with-authority": "subjective zone/line detection",
 }
 
+# Real future indicators that need a DIFFERENT contract than the per-bar, single-symbol, 1:1
+# ``Indicator`` base (a benchmark series, bar-resampling, or volume-by-price binning) — or that
+# have no defensible spec. Deferred by design, NOT "in-scope but unbuilt". See docs/BACKLOG.md.
+DEFERRED: dict[str, str] = {
+    "ttm_squeeze": "alias of `squeeze` (TTM Squeeze *is* the built `squeeze`) — documented, no 2nd impl",
+    "rs_line": "needs a benchmark/index series → 2-input relative-strength contract (app/screener)",
+    "mansfield_rs": "needs a benchmark/index series → 2-input relative-strength contract (app/screener)",
+    "renko": "rebins bars; output not 1:1 with the input index → chart-transform sub-module",
+    "kagi": "rebins bars; output not 1:1 with the input index → chart-transform sub-module",
+    "three_line_break": "rebins bars; output not 1:1 with the input index → chart-transform sub-module",
+    "vp": "volume-by-price histogram (not a per-bar series) → sub-module",
+    "gsv": "no defensible definition/oracle in any reference lib — research the spec before building",
+    "wammie": "no authoritative definition or oracle in any reference lib — dropped unless a spec surfaces",
+    "moolah": "no authoritative definition or oracle in any reference lib — dropped unless a spec surfaces",
+}
+
 
 def _scan(predicate_dir: str) -> str:
     parts = []
     for path in (ROOT / "tests").rglob("*.py"):
-        is_parity = "parity" in path.name
+        # Classify by directory, not a substring of the filename: ``test_disparity.py`` is a
+        # golden unit test, not a parity test, even though "disparity" contains "parity".
+        is_parity = "parity" in path.parts
         if (predicate_dir == "parity") == is_parity:
             parts.append(path.read_text())
     return "\n".join(parts)
@@ -273,6 +288,19 @@ def build() -> str:
     lines.append("")
     for item, reason in OUT_OF_SCOPE.items():
         lines.append(f"- **{item}** — {reason}")
+    lines.append("")
+
+    lines.append("## Deferred (needs a different contract than the per-bar `Indicator`)")
+    lines.append("")
+    lines.append(
+        f"{len(DEFERRED)} items from the research catalog are **not** plain per-symbol 1:1 OHLCV "
+        "indicators, so they don't fit this library's core contract today (they need a benchmark "
+        "series, bar-resampling, volume-by-price binning, or a defensible spec). Recorded here so "
+        "they read as *deferred by design*, not as missing work. Full plan: `docs/BACKLOG.md`."
+    )
+    lines.append("")
+    for item, reason in DEFERRED.items():
+        lines.append(f"- **`{item}`** — {reason}")
     lines.append("")
     return "\n".join(lines)
 
