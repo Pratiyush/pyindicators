@@ -50,6 +50,6 @@ These were places our output equalled a defensible canonical definition but dive
 
 ## Individual code reviews
 
-**32** indicators additionally have a line-by-line implementation + test-case code review: see `ref/AUDIT_base_pricetransform_stats_relative_structure.md` (base / price_transform / statistics / relative / structure).
+**302** indicators additionally have a line-by-line implementation + test-case code review: see `ref/AUDIT_base_pricetransform_stats_relative_structure.md` (base / price_transform / statistics / relative / structure).
 
 Per-indicator build + audit status (including the coverage-warn backfill list) lives in the single source-of-truth dashboard `docs/TRACKING.md`.

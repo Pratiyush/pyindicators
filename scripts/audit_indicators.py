@@ -207,6 +207,13 @@ DEEP_REVIEWED: set[str] = {
     "aroon_osc", "psar", "sarext", "supertrend", "ichimoku", "vortex", "trix", "kst", "dpo",
     "chop", "vhf", "cksp", "qstick", "ttm_trend", "increasing", "decreasing", "amat", "pmax",
     "pivots", "long_run", "short_run",
+    # momentum (ref/AUDIT_momentum.md)
+    "rsi", "rsx", "crsi", "stochrsi", "rsi_positive_reversal", "rsi_negative_reversal", "stoch",
+    "stochf", "kdj", "smi", "willr", "uo", "demarker", "roc", "rocp", "rocr", "rocr100", "mom",
+    "slope", "bias", "disparity_index", "cci", "cmo", "coppock", "tsi", "pvo", "fisher",
+    "laguerre_rsi", "cfo", "fosc", "cg", "pgo", "psl", "rsl", "rvgi", "inertia", "cti",
+    "derivative_osc", "er", "squeeze", "squeeze_pro", "ttm_momentum", "stc", "qqe", "alligator",
+    "gator", "ao", "eri", "bop", "brar", "td_seq", "cmb_composite_index",
 }
 
 # The 7 convention/scale concerns surfaced by the original four-way manual audit — all resolved.
