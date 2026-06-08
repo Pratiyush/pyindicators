@@ -13,26 +13,26 @@ Every registered indicator is run through three review stages (defined in `scrip
 
 ## Result: **0 correctness failures** across 302 indicators
 
-- ✅ fully clean (passes all three stages): **214**
-- ⚠️ correct but missing parity/real-data coverage (stage 3): **88**
+- ✅ fully clean (passes all three stages): **302**
+- ⚠️ correct but missing parity/real-data coverage (stage 3): **0**
 - ❌ hard correctness failure (stage 1 or 2): **0**
 
 | category | indicators | clean | coverage-warn | FAIL |
 |----------|-----------:|------:|--------------:|-----:|
-| base | 7 | 4 | 3 | 0 |
+| base | 7 | 7 | 0 | 0 |
 | candles | 65 | 65 | 0 | 0 |
 | cycle | 9 | 9 | 0 | 0 |
 | math_transform | 26 | 26 | 0 | 0 |
-| momentum | 52 | 32 | 20 | 0 |
-| price_transform | 7 | 0 | 7 | 0 |
+| momentum | 52 | 52 | 0 | 0 |
+| price_transform | 7 | 7 | 0 | 0 |
 | relative | 1 | 1 | 0 | 0 |
-| statistics | 19 | 8 | 11 | 0 |
+| statistics | 19 | 19 | 0 | 0 |
 | structure | 4 | 4 | 0 | 0 |
-| trend | 62 | 31 | 31 | 0 |
+| trend | 62 | 62 | 0 | 0 |
 | utils | 5 | 5 | 0 | 0 |
-| volatility | 18 | 12 | 6 | 0 |
-| volume | 27 | 17 | 10 | 0 |
-| **total** | **302** | **214** | **88** | **0** |
+| volatility | 18 | 18 | 0 | 0 |
+| volume | 27 | 27 | 0 | 0 |
+| **total** | **302** | **302** | **0** | **0** |
 
 ## Convention/scale concerns from the original manual audit — all resolved
 
