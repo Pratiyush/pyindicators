@@ -168,6 +168,24 @@ DEEP_REVIEWED: set[str] = {
     "linreg", "linreg_slope", "linreg_intercept", "linreg_angle", "tsf", "zscore", "mad",
     "median", "quantile", "skew", "kurtosis", "entropy", "hurst_exponent",
     "rs_rating", "rolling_high", "rolling_low", "pct_from_high", "pct_from_low",
+    # math_transform (ref/AUDIT_math_transform.md)
+    "acos", "asin", "atan", "cos", "cosh", "sin", "sinh", "tan", "tanh", "exp", "ln", "log10",
+    "sqrt", "ceil", "floor", "add", "sub", "mult", "div", "max", "min", "sum", "minmax",
+    "maxindex", "minindex", "minmaxindex",
+    # candles (ref/AUDIT_candles.md) — 61 exact-parity vs talib.CDL* + 4 VSA extras
+    "two_crows", "three_black_crows", "three_inside", "three_line_strike", "three_outside",
+    "three_stars_in_south", "three_white_soldiers", "abandoned_baby", "advance_block",
+    "belt_hold", "breakaway", "closing_marubozu", "conceal_baby_swallow", "counterattack",
+    "dark_cloud_cover", "doji", "doji_star", "dragonfly_doji", "engulfing", "evening_doji_star",
+    "evening_star", "gap_side_side_white", "gravestone_doji", "hammer", "hanging_man", "harami",
+    "harami_cross", "high_wave", "hikkake", "hikkake_mod", "homing_pigeon", "identical_three_crows",
+    "in_neck", "inverted_hammer", "kicking", "kicking_by_length", "ladder_bottom",
+    "long_legged_doji", "long_line", "marubozu", "matching_low", "mat_hold", "morning_doji_star",
+    "morning_star", "on_neck", "piercing", "rickshaw_man", "rise_fall_three_methods",
+    "separating_lines", "shooting_star", "short_line", "spinning_top", "stalled_pattern",
+    "stick_sandwich", "takuri", "tasuki_gap", "thrusting", "tristar", "unique_three_river",
+    "upside_gap_two_crows", "xside_gap_three_methods", "spring", "upthrust", "big_shadow",
+    "kangaroo_tail",
 }
 
 # The 7 convention/scale concerns surfaced by the original four-way manual audit — all resolved.
