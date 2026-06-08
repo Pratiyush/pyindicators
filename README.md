@@ -59,6 +59,18 @@ pip install -e ".[dev,parity]"
 pytest
 ```
 
+## Documentation
+
+- **[`docs/index.html`](docs/index.html)** — a self-contained, searchable HTML reference for
+  every indicator (open it in a browser; no build step). Regenerate with
+  `python scripts/build_docs.py`.
+- **[`docs/graphs/`](docs/graphs/)** — one Markdown file per indicator with **visualization
+  ideas** (where to draw it, scale & reference lines, how to render each output, signals to
+  highlight). Regenerate with `python scripts/build_graph_ideas.py`.
+- **[`docs/TRACKING.md`](docs/TRACKING.md)** — the build/quality dashboard (status, parity,
+  external-library and review coverage per indicator); **[`docs/AUDIT.md`](docs/AUDIT.md)** — the
+  correctness audit.
+
 ## License
 
 MIT © Pratiyush
