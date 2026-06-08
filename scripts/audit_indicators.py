@@ -186,6 +186,12 @@ DEEP_REVIEWED: set[str] = {
     "stick_sandwich", "takuri", "tasuki_gap", "thrusting", "tristar", "unique_three_river",
     "upside_gap_two_crows", "xside_gap_three_methods", "spring", "upthrust", "big_shadow",
     "kangaroo_tail",
+    # utils + statistics extras + cycle (ref/AUDIT_utils_stats_cycle.md)
+    "crossover", "crossunder", "crossany", "cross_value", "lag", "decay", "edecay",
+    "percent_rank", "roc1",
+    "correl", "beta", "covariance", "r_squared", "stderr", "tos_stdevall",
+    "ht_dcperiod", "ht_dcphase", "ht_phasor", "ht_sine", "ht_trendmode", "ht_trendline",
+    "ebsw", "dsp", "msw",
 }
 
 # The 7 convention/scale concerns surfaced by the original four-way manual audit — all resolved.
