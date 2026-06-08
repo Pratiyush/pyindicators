@@ -91,13 +91,13 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `minus_dm` | minus_dm | high, low | -DM, Minus Directional Movement | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `aroon_osc` | aroon_osc | high, low | Aroon Oscillator, AROONOSC | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `psar` | psar, psar_af, psar_reversal | high, low | Parabolic SAR, Stop And Reverse | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `psar` | psar, psar_af, psar_reversal | high, low | Parabolic SAR, Stop And Reverse | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `sarext` | sarext | high, low | Extended Parabolic SAR, SAREXT, Parabolic SAR Extended | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `supertrend` | supertrend, supertrend_dir | high, low, close | Supertrend | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `ichimoku` | tenkan, kijun, span_a, span_b | high, low | Ichimoku Kinko Hyo, Ichimoku Cloud, Kumo | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `ichimoku` | tenkan, kijun, span_a, span_b | high, low | Ichimoku Kinko Hyo, Ichimoku Cloud, Kumo | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `vortex` | vi_plus, vi_minus | high, low, close | Vortex Indicator, VI | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `trix` | trix, trix_signal | close | Triple Exponential Average | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `kst` | kst, kst_signal | close | Know Sure Thing, Summed ROC | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `kst` | kst, kst_signal | close | Know Sure Thing, Summed ROC | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `dpo` | dpo | close | Detrended Price Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `chop` | chop | high, low, close | Choppiness Index | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `vhf` | vhf | close | Vertical Horizontal Filter | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -128,7 +128,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `rocr` | rocr | close | Rate of Change Ratio | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `rocr100` | rocr100 | close | Rate of Change Ratio 100 | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `mom` | mom | close | Momentum | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `tsi` | tsi, tsi_signal | close | True Strength Index | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `tsi` | tsi, tsi_signal | close | True Strength Index | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `uo` | uo | high, low, close | Ultimate Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `ao` | ao | high, low | Awesome Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `cmo` | cmo | close | Chande Momentum Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |

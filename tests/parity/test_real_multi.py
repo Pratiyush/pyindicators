@@ -269,3 +269,43 @@ def test_bbands_real_multi():
         (PTA, "pandas_ta", lambda: PTA.bbands(C, length=20, std=2).iloc[:, 1]),
     ])
     agree(INDICATORS.create("bbands", length=20).compute(DF)["bb_middle"], refs)
+
+
+def test_ichimoku_real_multi():
+    # Tenkan-sen (conversion line) is unambiguous across libraries.
+    refs = _collect([
+        (FINTA, "finta", lambda: FINTA.ICHIMOKU(DF)["TENKAN"]),
+        (TA2, "ta", lambda: TA2.trend.IchimokuIndicator(H, L, window1=9, window2=26, window3=52).ichimoku_conversion_line()),
+        (PTA, "pandas_ta", lambda: PTA.ichimoku(H, L, C)[0].iloc[:, 2]),
+    ])
+    agree(INDICATORS.create("ichimoku").compute(DF)["tenkan"], refs)
+
+
+def test_psar_real_multi():
+    # finta's SAR is a documented variant -> excluded; TA-Lib/ta/pandas-ta agree exactly.
+    refs = _collect([
+        (talib, "talib", lambda: talib.SAR(HA, LA, 0.02, 0.2)),
+        (TA2, "ta", lambda: TA2.trend.PSARIndicator(H, L, C, step=0.02, max_step=0.2).psar()),
+        (PTA, "pandas_ta", lambda: PTA.psar(H, L, C, af0=0.02, max_af=0.2).iloc[:, 0].fillna(
+            PTA.psar(H, L, C, af0=0.02, max_af=0.2).iloc[:, 1])),
+    ])
+    agree(INDICATORS.create("psar", af0=0.02, max_af=0.2).compute(DF)["psar"], refs, tail=200, rtol=1e-4)
+
+
+def test_tsi_real_multi():
+    refs = _collect([
+        (FINTA, "finta", lambda: FINTA.TSI(DF, long=25, short=13)["TSI"]),
+        (TA2, "ta", lambda: TA2.momentum.tsi(C, window_slow=25, window_fast=13)),
+        (PTA, "pandas_ta", lambda: PTA.tsi(C, fast=13, slow=25).iloc[:, 0]),
+    ])
+    agree(INDICATORS.create("tsi", long=25, short=13, signal=7).compute(DF)["tsi"], refs, tail=200, rtol=1e-4)
+
+
+def test_kst_real_multi():
+    # pandas-ta scales KST by 100 (non-standard) -> divided back to the StockCharts/ta convention.
+    refs = _collect([
+        (FINTA, "finta", lambda: FINTA.KST(DF)["KST"]),
+        (TA2, "ta", lambda: TA2.trend.kst(C)),
+        (PTA, "pandas_ta", lambda: PTA.kst(C).iloc[:, 0] / 100.0),
+    ])
+    agree(INDICATORS.create("kst").compute(DF)["kst"], refs, tail=200, rtol=1e-3)
