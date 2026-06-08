@@ -213,12 +213,15 @@ def build() -> str:
         "`docs/AUDIT.md`.",
         "",
         "Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parity) · "
-        "🚧 In progress (implemented, missing a test) · ⬜ Pending (not built). The "
-        "**3-lib / real / invalid** columns track the quality bar below — built indicators that "
-        "predate a rule are backfilled incrementally (⬜ = todo, not a regression). **audit** = "
-        "the live 3-stage audit verdict (✅ clean · ⚠️ correct but missing parity/real coverage · "
+        "🚧 In progress (implemented, missing a test) · ⬜ Pending (not built). **real** = has a "
+        "real-AAPL test (now ✅ for every indicator). **3-lib** = cross-checked against >=3 "
+        "independent libraries on real data — **capped by availability**: only ~38 of our "
+        "indicators are shipped by 3+ of {TA-Lib, pandas-ta, finta, ta}, so ⬜ here usually means "
+        "<3 libraries implement it (it is still validated against the 1-2 that do, in the parity "
+        "suite), NOT a coverage gap. **invalid** = covered by the registry invalid-input meta-test. "
+        "**audit** = the live 3-stage verdict (✅ clean · ⚠️ missing parity/real coverage · "
         "❌ correctness failure · — not built). **review** = has a line-by-line implementation + "
-        "test-case code review (`ref/AUDIT_base_pricetransform_stats_relative_structure.md`).",
+        "test-case code review (`ref/AUDIT_*.md`).",
         "",
         "## Definition of Done (per indicator) — the quality checklist",
         "",

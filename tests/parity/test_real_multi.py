@@ -173,3 +173,99 @@ def test_dema_real_multi():
         (PTA, "pandas_ta", lambda: PTA.dema(C, length=20)),
     ])
     agree(INDICATORS.create("dema", length=20).compute(DF)["dema"], refs, tail=200, rtol=1e-4)
+
+
+# --- additional >=3-library cross-checks (each verified to agree on real AAPL) -------------
+
+def test_tema_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.TEMA(CA, 20)),
+        (FINTA, "finta", lambda: FINTA.TEMA(DF, period=20)),
+        (PTA, "pandas_ta", lambda: PTA.tema(C, length=20)),
+    ])
+    agree(INDICATORS.create("tema", length=20).compute(DF)["tema"], refs, tail=200, rtol=1e-4)
+
+
+def test_kama_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.KAMA(CA, 10)),
+        (TA2, "ta", lambda: TA2.momentum.kama(C, window=10)),
+        (PTA, "pandas_ta", lambda: PTA.kama(C, length=10)),
+    ])
+    agree(INDICATORS.create("kama", length=10).compute(DF)["kama"], refs, rtol=1e-5)
+
+
+def test_mom_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.MOM(CA, 10)),
+        (FINTA, "finta", lambda: FINTA.MOM(DF, period=10)),
+        (PTA, "pandas_ta", lambda: PTA.mom(C, length=10)),
+    ])
+    agree(INDICATORS.create("mom", length=10).compute(DF)["mom"], refs)
+
+
+def test_true_range_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.TRANGE(HA, LA, CA)),
+        (FINTA, "finta", lambda: FINTA.TR(DF)),
+        (PTA, "pandas_ta", lambda: PTA.true_range(H, L, C)),
+    ])
+    agree(INDICATORS.create("true_range").compute(DF)["true_range"], refs)
+
+
+def test_bop_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.BOP(DF["open"].to_numpy(), HA, LA, CA)),
+        (FINTA, "finta", lambda: FINTA.BOP(DF)),
+        (PTA, "pandas_ta", lambda: PTA.bop(DF["open"], H, L, C)),
+    ])
+    agree(INDICATORS.create("bop").compute(DF)["bop"], refs)
+
+
+def test_macd_real_multi():
+    # finta/ta seed the EMAs differently -> all four converge on the tail.
+    refs = _collect([
+        (talib, "talib", lambda: talib.MACD(CA, 12, 26, 9)[0]),
+        (FINTA, "finta", lambda: FINTA.MACD(DF)["MACD"]),
+        (TA2, "ta", lambda: TA2.trend.MACD(C, window_slow=26, window_fast=12, window_sign=9).macd()),
+        (PTA, "pandas_ta", lambda: PTA.macd(C, fast=12, slow=26, signal=9).iloc[:, 0]),
+    ])
+    agree(INDICATORS.create("macd", fast=12, slow=26, signal=9).compute(DF)["macd"], refs, tail=200, rtol=1e-4)
+
+
+def test_trix_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.TRIX(CA, 18)),
+        (TA2, "ta", lambda: TA2.trend.trix(C, window=18)),
+        (PTA, "pandas_ta", lambda: PTA.trix(C, length=18).iloc[:, 0]),
+    ])
+    agree(INDICATORS.create("trix", length=18).compute(DF)["trix"], refs, tail=200, rtol=1e-3)
+
+
+def test_adx_real_multi():
+    # ADX is a Wilder double-smoothing; the three converge on the tail.
+    refs = _collect([
+        (talib, "talib", lambda: talib.ADX(HA, LA, CA, 14)),
+        (TA2, "ta", lambda: TA2.trend.adx(H, L, C, window=14)),
+        (PTA, "pandas_ta", lambda: PTA.adx(H, L, C, length=14).iloc[:, 0]),
+    ])
+    agree(INDICATORS.create("adx", length=14).compute(DF)["adx"], refs, tail=200, rtol=1e-2)
+
+
+def test_vortex_real_multi():
+    refs = _collect([
+        (FINTA, "finta", lambda: FINTA.VORTEX(DF, period=14)["VIp"]),
+        (TA2, "ta", lambda: TA2.trend.vortex_indicator_pos(H, L, C, window=14)),
+        (PTA, "pandas_ta", lambda: PTA.vortex(H, L, C, length=14).iloc[:, 0]),
+    ])
+    agree(INDICATORS.create("vortex", length=14).compute(DF)["vi_plus"], refs, rtol=1e-4)
+
+
+def test_bbands_real_multi():
+    # Compare the middle band (SMA) where all three libraries are exact.
+    refs = _collect([
+        (talib, "talib", lambda: talib.BBANDS(CA, 20, 2, 2)[1]),
+        (FINTA, "finta", lambda: FINTA.BBANDS(DF, period=20)["BB_MIDDLE"]),
+        (PTA, "pandas_ta", lambda: PTA.bbands(C, length=20, std=2).iloc[:, 1]),
+    ])
+    agree(INDICATORS.create("bbands", length=20).compute(DF)["bb_middle"], refs)
