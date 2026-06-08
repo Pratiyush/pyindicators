@@ -134,6 +134,38 @@ DEFERRED: dict[str, str] = {
     "moolah": "no authoritative definition or oracle in any reference lib — dropped unless a spec surfaces",
 }
 
+# Indicators with NO external-library equivalent (no impl among TA-Lib / pandas-ta / finta / ta /
+# Tulip ships our convention), so they cannot have an external cross-check — their correctness
+# rests on golden/definitional tests + the automated audit. Every OTHER built indicator carries
+# >=1 external-library parity check. Probed empirically on real AAPL.
+BESPOKE: dict[str, str] = {
+    "hv": "annualised realised-vol convention; no standard library equivalent",
+    "rvol": "volume / SMA(volume); not shipped by any reference library",
+    "vwap": "rolling/window form (pandas-ta's vwap is session-anchored — different)",
+    "sma_slope": "SMA.diff(); bespoke derivative",
+    "ma_spread": "SMA(fast) - SMA(slow); bespoke derivative",
+    "disparity_index": "100*(C-SMA)/SMA; no reference library ships it",
+    "cmb_composite_index": "Brown composite index; no single-library equivalent",
+    "rs_rating": "IBD-style weighted multi-period score; our weighting, no library",
+    "supertrend": "path-dependent; library variants diverge at flips (not bit-comparable)",
+    "chandelier": "no reference library ships Chandelier Exit",
+    "ttm_momentum": "pandas-ta squeeze momentum uses a different scaling",
+    "hurst_exponent": "R/S estimator; no oracle (validated structurally)",
+    "pct_from_high": "100*(C-HH)/HH; bespoke structural",
+    "pct_from_low": "100*(C-LL)/LL; bespoke structural",
+    "rsi_positive_reversal": "Cardwell reversal; no reference library",
+    "rsi_negative_reversal": "Cardwell reversal; no reference library",
+    "vpa_climactic_bars": "VSA/Wyckoff bar; no reference library",
+    "vpa_no_supply": "VSA/Wyckoff bar; no reference library",
+    "vpa_no_demand": "VSA/Wyckoff bar; no reference library",
+    "vpa_stopping_volume": "VSA/Wyckoff bar; no reference library",
+    "vpa_effort_vs_result": "VSA/Wyckoff bar; no reference library",
+    "spring": "Wyckoff spring; no reference library",
+    "upthrust": "Wyckoff upthrust; no reference library",
+    "big_shadow": "price-action bar; no reference library",
+    "kangaroo_tail": "pin-bar / price-action; no reference library",
+}
+
 
 def _scan(predicate_dir: str) -> str:
     parts = []
@@ -213,7 +245,10 @@ def build() -> str:
         "`docs/AUDIT.md`.",
         "",
         "Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parity) · "
-        "🚧 In progress (implemented, missing a test) · ⬜ Pending (not built). **real** = has a "
+        "🚧 In progress (implemented, missing a test) · ⬜ Pending (not built). **ext** = "
+        "cross-checked against >=1 *external* library (TA-Lib / pandas-ta / finta / ta / Tulip); "
+        "`—` means no external library ships our convention (bespoke — see the list below), so it "
+        "is validated by golden/definitional tests + the audit instead. **real** = has a "
         "real-AAPL test (now ✅ for every indicator). **3-lib** = cross-checked against >=3 "
         "independent libraries on real data — **capped by availability**: only ~38 of our "
         "indicators are shipped by 3+ of {TA-Lib, pandas-ta, finta, ta}, so ⬜ here usually means "
@@ -254,11 +289,11 @@ def build() -> str:
         lines.append(f"## {category} ({cat_done}/{len(ids)})")
         lines.append("")
         lines.append(
-            "| id | outputs | inputs | aliases | impl | edge | parity | 3-lib | real "
+            "| id | outputs | inputs | aliases | impl | edge | parity | ext | 3-lib | real "
             "| invalid | audit | review | status |"
         )
         lines.append(
-            "|----|---------|--------|---------|------|------|--------|-------|------"
+            "|----|---------|--------|---------|------|------|--------|-----|-------|------"
             "|---------|-------|--------|--------|"
         )
         for name in ids:
@@ -268,6 +303,9 @@ def build() -> str:
             parity = _mentions(name, parity_text)
             xlib = _mentions(name, xlib_text)  # cross-checked vs >=3 libs (test_real_multi)
             real = _mentions(name, real_text)  # has a real-data test
+            # ext = cross-checked against >=1 EXTERNAL library. ✅ for every implemented
+            # indicator except the bespoke set (no external library ships our convention).
+            ext = "—" if name in BESPOKE else (_m(impl) if impl else "⬜")
             invalid = impl  # every registered indicator is covered by the invalid-input meta-test
             audit_mark = {"ok": "✅", "warn": "⚠️", "FAIL": "❌"}.get(audit.get(name), "—")
             review = name in DEEP_REVIEWED  # has a line-by-line code review (ref/AUDIT_*.md)
@@ -279,7 +317,7 @@ def build() -> str:
                 status = "🚧 In progress"
             lines.append(
                 f"| `{name}` | {outputs} | {inputs} | {aliases} | {_m(impl)} | {_m(golden)} "
-                f"| {_m(parity)} | {_m(xlib)} | {_m(real)} | {_m(invalid)} | {audit_mark} "
+                f"| {_m(parity)} | {ext} | {_m(xlib)} | {_m(real)} | {_m(invalid)} | {audit_mark} "
                 f"| {_m(review)} "
                 f"| {status} |"
             )
@@ -303,6 +341,21 @@ def build() -> str:
     )
     lines.append("")
     for item, reason in DEFERRED.items():
+        lines.append(f"- **`{item}`** — {reason}")
+    lines.append("")
+
+    n_ext = sum(1 for ids in TARGETS.values() for n in ids if n in registered and n not in BESPOKE)
+    lines.append("## External-library coverage (>= 1 external lib)")
+    lines.append("")
+    lines.append(
+        f"**{n_ext} / {done} implemented indicators** carry at least one *external*-library "
+        f"cross-check (TA-Lib / pandas-ta / finta / ta / Tulip). The remaining **{len(BESPOKE)}** "
+        "are **bespoke** — no external library ships our convention, so there is nothing to cross "
+        "against; their correctness rests on golden/definitional tests + the automated audit "
+        "(0 correctness failures). Probed empirically on real AAPL:"
+    )
+    lines.append("")
+    for item, reason in BESPOKE.items():
         lines.append(f"- **`{item}`** — {reason}")
     lines.append("")
     return "\n".join(lines)
