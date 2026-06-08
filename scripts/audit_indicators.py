@@ -192,6 +192,13 @@ DEEP_REVIEWED: set[str] = {
     "correl", "beta", "covariance", "r_squared", "stderr", "tos_stdevall",
     "ht_dcperiod", "ht_dcphase", "ht_phasor", "ht_sine", "ht_trendmode", "ht_trendline",
     "ebsw", "dsp", "msw",
+    # volatility + volume (ref/AUDIT_volatility_volume.md)
+    "bbands", "atr", "natr", "keltner", "donchian", "cvi", "ulcer", "hv", "massi", "rvi",
+    "accbands", "aberration", "chandelier", "hwc", "pdist", "thermo", "apz", "starc",
+    "obv", "ad", "cmf", "adosc", "mfi", "vwap", "efi", "eom", "nvi", "pvi", "kvo", "vwmacd",
+    "pvt", "vfi", "marketfi", "pvol", "pvr", "wad", "aobv", "rvol", "vol_sma", "fve",
+    "vpa_climactic_bars", "vpa_no_supply", "vpa_no_demand", "vpa_stopping_volume",
+    "vpa_effort_vs_result",
 }
 
 # The 7 convention/scale concerns surfaced by the original four-way manual audit — all resolved.
