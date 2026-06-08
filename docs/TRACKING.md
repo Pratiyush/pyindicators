@@ -28,7 +28,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `sma` | sma | close | Moving Average, MA, Arithmetic MA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `ema` | ema | close | EWMA, Exponentially Weighted MA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `wma` | wma | close | Linearly Weighted MA, LWMA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `rma` | rma | close | SMMA, Wilder's Smoothing, Modified MA, Running MA | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `rma` | rma | close | SMMA, Wilder's Smoothing, Modified MA, Running MA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `stdev` | stdev | close | STDDEV, Standard Deviation, Moving StdDev | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `variance` | variance | close | VAR, Moving Variance | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `true_range` | true_range | high, low, close | TR, TRANGE | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -53,7 +53,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `tema` | tema | close | Triple Exponential MA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `trima` | trima | close | Triangular MA | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `kama` | kama | close | Kaufman Adaptive MA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `hma` | hma | close | Hull Moving Average | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `hma` | hma | close | Hull Moving Average | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `vwma` | vwma | close, volume | Volume Weighted MA | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `alma` | alma | close | Arnaud Legoux MA | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `zlma` | zlma | close | Zero-Lag EMA, ZLEMA | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -80,7 +80,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `macd` | macd, macd_signal, macd_hist | close | Moving Average Convergence Divergence | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `macdext` | macdext, macdext_signal, macdext_hist | close | MACD Extended, MACDEXT | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `macdfix` | macdfix, macdfix_signal, macdfix_hist | close | MACD Fixed 12/26, MACDFIX | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `ppo` | ppo, ppo_signal, ppo_hist | close | Percentage Price Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `ppo` | ppo, ppo_signal, ppo_hist | close | Percentage Price Oscillator | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `apo` | apo | close | Absolute Price Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `adx` | adx, plus_di, minus_di | high, low, close | Average Directional Index, DMI | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `adxr` | adxr | high, low, close | Average Directional Index Rating | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -89,7 +89,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `minus_di` | minus_di | high, low, close | -DI, Minus Directional Indicator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `plus_dm` | plus_dm | high, low | +DM, Plus Directional Movement | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `minus_dm` | minus_dm | high, low | -DM, Minus Directional Movement | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `aroon` | aroon_down, aroon_up, aroon_osc | high, low | Aroon, Aroon Oscillator | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `aroon_osc` | aroon_osc | high, low | Aroon Oscillator, AROONOSC | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `psar` | psar, psar_af, psar_reversal | high, low | Parabolic SAR, Stop And Reverse | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `sarext` | sarext | high, low | Extended Parabolic SAR, SAREXT, Parabolic SAR Extended | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -118,7 +118,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | id | outputs | inputs | aliases | impl | edge | parity | 3-lib | real | invalid | audit | review | status |
 |----|---------|--------|---------|------|------|--------|-------|------|---------|-------|--------|--------|
 | `rsi` | rsi | close | Relative Strength Index | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `stoch` | stoch_k, stoch_d | high, low, close | Stochastic Oscillator, %K/%D | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `stoch` | stoch_k, stoch_d | high, low, close | Stochastic Oscillator, %K/%D | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `stochf` | stochf_k, stochf_d | high, low, close | Fast Stochastic, STOCHF | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `stochrsi` | stochrsi_k, stochrsi_d | close | Stochastic RSI | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `willr` | willr | high, low, close | Williams %R, Williams Percent Range | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -129,7 +129,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `rocr100` | rocr100 | close | Rate of Change Ratio 100 | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `mom` | mom | close | Momentum | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `tsi` | tsi, tsi_signal | close | True Strength Index | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `uo` | uo | high, low, close | Ultimate Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `uo` | uo | high, low, close | Ultimate Oscillator | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `ao` | ao | high, low | Awesome Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `cmo` | cmo | close | Chande Momentum Oscillator | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `fisher` | fisher, fisher_signal | high, low | Fisher Transform, FISHT | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -199,7 +199,7 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 | `obv` | obv | close, volume | On-Balance Volume | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `ad` | ad | high, low, close, volume | Accumulation/Distribution Line, ADL | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `cmf` | cmf | high, low, close, volume | Chaikin Money Flow | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `adosc` | adosc | high, low, close, volume | Chaikin Oscillator, ADOSC | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `adosc` | adosc | high, low, close, volume | Chaikin Oscillator, ADOSC | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `mfi` | mfi | high, low, close, volume | Money Flow Index | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `vwap` | vwap | high, low, close, volume | Volume Weighted Average Price | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `efi` | efi | close, volume | Force Index, Elder Force Index | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
@@ -228,11 +228,11 @@ Legend: ✅ yes · ⬜ no/pending. **Status** = Done (implemented + edge + parit
 
 | id | outputs | inputs | aliases | impl | edge | parity | 3-lib | real | invalid | audit | review | status |
 |----|---------|--------|---------|------|------|--------|-------|------|---------|-------|--------|--------|
-| `linreg` | linreg | close | Linear Regression, LSMA | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `linreg` | linreg | close | Linear Regression, LSMA | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `linreg_slope` | linreg_slope | close | Linear Regression Slope | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `linreg_intercept` | linreg_intercept | close | Linear Regression Intercept | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `linreg_angle` | linreg_angle | close | Linear Regression Angle | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
-| `tsf` | tsf | close | Time Series Forecast | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
+| `tsf` | tsf | close | Time Series Forecast | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `correl` | correl | high, low | Pearson Correlation Coefficient, CORREL | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `beta` | beta | high, low | Beta | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |
 | `zscore` | zscore | close | Z-Score | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ✅ | ✅ | ✅ Done |

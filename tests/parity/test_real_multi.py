@@ -4,7 +4,8 @@ Two guarantees the synthetic parity tests cannot give on their own:
   1. **Real market data** — every check runs on a committed fixture of genuine daily AAPL
      OHLCV (real gaps, real volume, real volatility), not a synthetic random walk.
   2. **>= 3 independent libraries** — each core indicator is cross-checked against every
-     reference implementation that ships it (TA-Lib, pandas-ta, finta, bukosabino/ta). Because
+     reference implementation that ships it (TA-Lib, pandas-ta, finta, bukosabino/ta, and
+     Tulip Indicators / tulipy — an independent C implementation of 104 indicators). Because
      we hand-roll every formula, agreement across several independent libraries on real data is
      the strongest evidence the math is right. ``agree(strict=True)`` enforces at least three.
 
@@ -35,10 +36,20 @@ try:
     import pandas_ta_classic as PTA
 except Exception:  # pragma: no cover - import guard
     PTA = None
+try:  # Tulip Indicators (independent C implementation, 104 indicators)
+    import tulipy as TI
+except Exception:  # pragma: no cover - import guard
+    TI = None
 
 DF = real_frame()
 H, L, C, V = DF["high"], DF["low"], DF["close"], DF["volume"]
 HA, LA, CA, VA = H.to_numpy(), L.to_numpy(), C.to_numpy(), V.to_numpy()
+
+
+def _tu(arr):
+    """Left-pad a tulipy output (which trims its warm-up) with NaN back to the full length."""
+    arr = np.asarray(arr, dtype="float64")
+    return np.concatenate([np.full(len(DF) - len(arr), np.nan), arr])
 
 
 def _collect(builders):
@@ -309,3 +320,87 @@ def test_kst_real_multi():
         (PTA, "pandas_ta", lambda: PTA.kst(C).iloc[:, 0] / 100.0),
     ])
     agree(INDICATORS.create("kst").compute(DF)["kst"], refs, tail=200, rtol=1e-3)
+
+
+# --- 3-library checks unlocked by Tulip Indicators (TI) as the third independent oracle ------
+
+def test_aroon_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.AROON(HA, LA, 14)[1]),
+        (TI, "tulipy", lambda: _tu(TI.aroon(HA, LA, 14)[1])),
+        (PTA, "pandas_ta", lambda: PTA.aroon(H, L, length=14).iloc[:, 1]),
+    ])
+    agree(INDICATORS.create("aroon", length=14).compute(DF)["aroon_up"], refs, tail=200, rtol=1e-3, atol=1e-3)
+
+
+def test_stoch_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.STOCH(HA, LA, CA, 14, 3, 0, 3, 0)[0]),
+        (TI, "tulipy", lambda: _tu(TI.stoch(HA, LA, CA, 14, 3, 3)[0])),
+        (PTA, "pandas_ta", lambda: PTA.stoch(H, L, C, k=14, d=3, smooth_k=3).iloc[:, 0]),
+    ])
+    agree(INDICATORS.create("stoch", k=14, d=3, smooth_k=3).compute(DF)["stoch_k"], refs, tail=200, rtol=1e-3, atol=1e-3)
+
+
+def test_ppo_real_multi():
+    # ours uses the finta/ta/Tulip %-base convention (vs the talib/pandas-ta variant).
+    refs = _collect([
+        (FINTA, "finta", lambda: FINTA.PPO(DF)["PPO"]),
+        (TA2, "ta", lambda: TA2.momentum.PercentagePriceOscillator(C, window_slow=26, window_fast=12, window_sign=9).ppo()),
+        (TI, "tulipy", lambda: _tu(TI.ppo(CA, 12, 26))),
+    ])
+    agree(INDICATORS.create("ppo", fast=12, slow=26, signal=9).compute(DF)["ppo"], refs, tail=200, rtol=1e-3, atol=1e-3)
+
+
+def test_rma_real_multi():
+    refs = _collect([
+        (PTA, "pandas_ta", lambda: PTA.rma(C, length=14)),
+        (FINTA, "finta", lambda: FINTA.SMMA(DF, period=14)),
+        (TI, "tulipy", lambda: _tu(TI.wilders(CA, 14))),
+    ])
+    agree(INDICATORS.create("rma", length=14).compute(DF)["rma"], refs, tail=200, rtol=1e-3)
+
+
+def test_uo_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.ULTOSC(HA, LA, CA, 7, 14, 28)),
+        (TA2, "ta", lambda: TA2.momentum.ultimate_oscillator(H, L, C)),
+        (TI, "tulipy", lambda: _tu(TI.ultosc(HA, LA, CA, 7, 14, 28))),
+    ])
+    agree(INDICATORS.create("uo").compute(DF)["uo"], refs, tail=200, rtol=1e-3, atol=1e-3)
+
+
+def test_hma_real_multi():
+    refs = _collect([
+        (PTA, "pandas_ta", lambda: PTA.hma(C, length=16)),
+        (FINTA, "finta", lambda: FINTA.HMA(DF, period=16)),
+        (TI, "tulipy", lambda: _tu(TI.hma(CA, 16))),
+    ])
+    agree(INDICATORS.create("hma", length=16).compute(DF)["hma"], refs, tail=200, rtol=1e-3)
+
+
+def test_adosc_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.ADOSC(HA, LA, CA, VA, 3, 10)),
+        (TI, "tulipy", lambda: _tu(TI.adosc(HA, LA, CA, VA, 3, 10))),
+        (PTA, "pandas_ta", lambda: PTA.adosc(H, L, C, V, fast=3, slow=10)),
+    ])
+    agree(INDICATORS.create("adosc", fast=3, slow=10).compute(DF)["adosc"], refs, tail=200, rtol=1e-3)
+
+
+def test_tsf_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.TSF(CA, 14)),
+        (TI, "tulipy", lambda: _tu(TI.tsf(CA, 14))),
+        (PTA, "pandas_ta", lambda: PTA.tsf(C, length=14)),
+    ])
+    agree(INDICATORS.create("tsf", length=14).compute(DF)["tsf"], refs, tail=200, rtol=1e-4)
+
+
+def test_linreg_real_multi():
+    refs = _collect([
+        (talib, "talib", lambda: talib.LINEARREG(CA, 14)),
+        (TI, "tulipy", lambda: _tu(TI.linreg(CA, 14))),
+        (PTA, "pandas_ta", lambda: PTA.linreg(C, length=14)),
+    ])
+    agree(INDICATORS.create("linreg", length=14).compute(DF)["linreg"], refs, tail=200, rtol=1e-4)
