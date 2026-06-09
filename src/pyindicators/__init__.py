@@ -18,8 +18,11 @@ from .core import (
     IndicatorSpec,
     Registry,
 )
+from .features import build_features, build_output, parse_spec, rename_outputs
+from .resample import align_to_base, resample_ohlcv
+from .timeframe import Timeframe
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 # Category packages — importing each registers its indicator classes. Imported AFTER the
 # core symbols above (the statement between the import blocks keeps this order stable).
@@ -46,5 +49,12 @@ __all__ = [
     "Registry",
     "OHLCV_COLUMNS",
     "CATEGORIES",
+    "Timeframe",
+    "build_features",
+    "build_output",
+    "parse_spec",
+    "rename_outputs",
+    "align_to_base",
+    "resample_ohlcv",
     "__version__",
 ]
